@@ -1,13 +1,17 @@
 # kittik-shape-basic
 
-![Build Status](https://img.shields.io/travis/ghaiklor/kittik-shape-basic.svg)
-![Coverage](https://img.shields.io/coveralls/ghaiklor/kittik-shape-basic.svg)
+![Build Status](https://img.shields.io/travis/kittikjs/shape-basic.svg)
+![Coverage](https://img.shields.io/coveralls/kittikjs/shape-basic.svg)
+
 ![Downloads](https://img.shields.io/npm/dm/kittik-shape-basic.svg)
 ![Downloads](https://img.shields.io/npm/dt/kittik-shape-basic.svg)
 ![npm version](https://img.shields.io/npm/v/kittik-shape-basic.svg)
-![dependencies](https://img.shields.io/david/ghaiklor/kittik-shape-basic.svg)
-![dev dependencies](https://img.shields.io/david/dev/ghaiklor/kittik-shape-basic.svg)
 ![License](https://img.shields.io/npm/l/kittik-shape-basic.svg)
+
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+![dependencies](https://img.shields.io/david/kittikjs/shape-basic.svg)
+![dev dependencies](https://img.shields.io/david/dev/kittikjs/shape-basic.svg)
 
 Basic shape which is needed for creating other shapes
 
@@ -19,10 +23,16 @@ Install it via npm:
 npm install kittik-shape-basic
 ```
 
-And include in your project:
+Import module and extend another one:
 
 ```javascript
-import kittik-shape-basic from 'kittik-shape-basic';
+import { Shape } from 'kittik-shape-basic';
+
+export class Rectangle extends Shape {
+  constructor(...args) {
+    super(...args);
+  }
+}
 ```
 
 ## License
