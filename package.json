@@ -1,0 +1,47 @@
+{
+  "name": "kittik-shape-basic",
+  "version": "0.0.0-semantic-release",
+  "description": "Basic shape which is needed for creating other shapes",
+  "main": "lib/Basic.js",
+  "author": "ghaiklor",
+  "bugs": {
+    "url": "https://github.com/kittikjs/shape-basic/issues"
+  },
+  "homepage": "https://github.com/kittikjs/shape-basic#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kittikjs/shape-basic.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "compile": "babel src --out-dir lib",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "prepublish": "npm run compile",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "test": "babel-node ./node_modules/.bin/isparta cover _mocha"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "6.2.0",
+    "babel-preset-es2015-node4": "2.0.2",
+    "babel-preset-stage-0": "6.1.18",
+    "chai": "3.4.1",
+    "coveralls": "2.11.4",
+    "cz-conventional-changelog": "^1.1.4",
+    "isparta": "4.0.0",
+    "mocha": "2.3.4",
+    "semantic-release": "^4.3.5",
+    "sinon": "1.17.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "publishConfig": {
+    "tag": "latest"
+  },
+  "release": {
+    "branch": "master"
+  }
+}
