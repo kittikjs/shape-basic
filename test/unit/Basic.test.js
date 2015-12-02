@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
-import { Shape } from '../../src/Basic';
+import Shape from '../../src/Basic';
 
 describe('Shape', () => {
   it('Should properly initialize shape instance with no arguments', () => {
@@ -119,7 +119,7 @@ describe('Shape', () => {
 
   it('Should properly throw error if trying to create Shape not from Object representation', () => {
     let obj = {};
-    assert.throws(() => Shape.fromObject(obj), Error, 'It looks like it is not an Object representation of the Shape');
+    assert.throws(() => Shape.fromObject(obj), Error, 'It looks like it is not an Object representation of the shape');
   });
 
   it('Should properly throw error if trying to create Shape not from its representation', () => {

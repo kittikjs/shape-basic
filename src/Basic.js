@@ -17,7 +17,7 @@
  *   }
  * }
  */
-export class Shape {
+export default class Shape {
   _text = '';
   _width = 15;
   _height = 5;
@@ -233,7 +233,7 @@ export class Shape {
    * @returns {Shape}
    */
   static fromObject(obj) {
-    if (!obj.name || !obj.options) throw new Error('It looks like it is not an Object representation of the Shape');
+    if (!obj.name || !obj.options) throw new Error('It looks like it is not an Object representation of the shape');
     if (obj.name !== this.name) throw new Error(`${obj.name} is not an Object representation of the ${this.name}`);
 
     return this.create(obj.options);
