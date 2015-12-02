@@ -26,11 +26,16 @@ npm install kittik-shape-basic
 Import module and extend another one:
 
 ```javascript
-import { Shape } from 'kittik-shape-basic';
+import Shape from 'kittik-shape-basic';
 
-export class Rectangle extends Shape {
+export default class Rectangle extends Shape {
   constructor(...args) {
     super(...args);
+  }
+
+  render(cursor) {
+    cursor.write('Hello');
+    // Other logic for rendering the shape
   }
 }
 ```
