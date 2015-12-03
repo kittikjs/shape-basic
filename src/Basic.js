@@ -5,9 +5,9 @@
  * @since 1.0.0
  * @version 1.0.0
  * @example
- * import { Shape } from './src/shapes/Shape';
+ * import Shape from 'kittik-shape-basic';
  *
- * export class Rectangle extends Shape {
+ * export default class Rectangle extends Shape {
  *   constructor(...args) {
  *     super(...args);
  *   }
