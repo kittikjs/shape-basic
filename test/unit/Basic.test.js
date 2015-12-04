@@ -56,6 +56,20 @@ describe('Shape', () => {
     assert.equal(shape.getForeground(), 'test');
   });
 
+  it('Should properly get/set animation', () => {
+    let shape = new Shape();
+    assert.notOk(shape.getAnimation());
+    assert.instanceOf(shape.setAnimation({name: 'print'}), Shape);
+    assert.deepEqual(shape.getAnimation(), {name: 'print'});
+  });
+
+  it('Should properly check if shape is animated', () => {
+    let shape = new Shape();
+    assert.notOk(shape.isAnimated());
+    assert.instanceOf(shape.setAnimation({name: 'print'}), Shape);
+    assert.ok(shape.isAnimated());
+  });
+
   it('Should properly throw exception if render is not overridden', () => {
     let shape = new Shape();
     assert.throws(() => shape.render(), Error);
@@ -74,13 +88,14 @@ describe('Shape', () => {
         x: 10,
         y: 10,
         background: undefined,
-        foreground: undefined
+        foreground: undefined,
+        animation: undefined
       }
     });
   });
 
   it('Should properly serialize shape to object with custom options', () => {
-    let shape = new Shape({text: 'test', x: 0, y: 0, width: 30, height: 50});
+    let shape = new Shape({text: 'test', x: 0, y: 0, width: 30, height: 50, animation: {name: 'print'}});
     let obj = shape.toObject();
 
     assert.deepEqual(obj, {
@@ -92,7 +107,8 @@ describe('Shape', () => {
         x: 0,
         y: 0,
         background: undefined,
-        foreground: undefined
+        foreground: undefined,
+        animation: {name: 'print'}
       }
     });
   });

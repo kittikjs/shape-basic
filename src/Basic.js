@@ -25,6 +25,7 @@ export default class Shape {
   _y = 10;
   _background;
   _foreground;
+  _animation;
 
   /**
    * Constructor is responsible for initializing base properties.
@@ -39,9 +40,10 @@ export default class Shape {
    * @param {Number} [options.y] Absolute coordinate Y
    * @param {String} [options.background] Background color from {@link COLORS}
    * @param {String} [options.foreground] Foreground color from {@link COLORS}
+   * @param {Object} [options.animation] Animation options for this shape
    */
   constructor(options = {}) {
-    let {text, width, height, x, y, background, foreground} = options;
+    let {text, width, height, x, y, background, foreground, animation} = options;
 
     this.setText(text);
     this.setWidth(width);
@@ -49,6 +51,7 @@ export default class Shape {
     this.setPosition(x, y);
     this.setBackground(background);
     this.setForeground(foreground);
+    this.setAnimation(animation);
   }
 
   /**
@@ -174,6 +177,36 @@ export default class Shape {
   }
 
   /**
+   * Get animation options from this shape.
+   *
+   * @returns {Object}
+   */
+  getAnimation() {
+    return this._animation;
+  }
+
+  /**
+   * Set animation options to the shape.
+   *
+   * @param {Object} options
+   * @param {String} options.name Animation name
+   * @returns {Shape}
+   */
+  setAnimation(options) {
+    this._animation = options;
+    return this;
+  }
+
+  /**
+   * Check if this shape is animated.
+   *
+   * @returns {Boolean}
+   */
+  isAnimated() {
+    return !!this._animation;
+  }
+
+  /**
    * Base render method that must be implemented in childes.
    *
    * @abstract
@@ -200,7 +233,8 @@ export default class Shape {
         x: this.getPosition().x,
         y: this.getPosition().y,
         background: this.getBackground(),
-        foreground: this.getForeground()
+        foreground: this.getForeground(),
+        animation: this.getAnimation()
       }
     };
   }
