@@ -188,12 +188,12 @@ export default class Shape {
   /**
    * Set animation options to the shape.
    *
-   * @param {Object} options
-   * @param {String} options.name Animation name
+   * @param {Object} animation
+   * @param {String} animation.name Animation name
    * @returns {Shape}
    */
-  setAnimation(options) {
-    this._animation = options;
+  setAnimation(animation) {
+    this._animation = animation;
     return this;
   }
 

@@ -153,7 +153,11 @@ describe('Shape', () => {
         x: 0,
         y: 0,
         background: undefined,
-        foreground: undefined
+        foreground: undefined,
+        animation: {
+          name: 'print',
+          interval: 100
+        }
       }
     };
 
@@ -165,6 +169,7 @@ describe('Shape', () => {
     assert.deepEqual(shape.getPosition(), {x: 0, y: 0});
     assert.isUndefined(shape.getBackground());
     assert.isUndefined(shape.getForeground());
+    assert.deepEqual(shape.getAnimation(), {name: 'print', interval: 100});
   });
 
   it('Should properly create Shape instance from JSON representation', () => {
