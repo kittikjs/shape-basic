@@ -8,10 +8,6 @@
  * import Shape from 'kittik-shape-basic';
  *
  * export default class Rectangle extends Shape {
- *   constructor(...args) {
- *     super(...args);
- *   }
- *
  *   render(cursor) {
  *     // Implement your logic here for rendering the shape
  *   }
