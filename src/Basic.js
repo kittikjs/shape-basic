@@ -54,7 +54,7 @@ export default class Shape {
    * Set new option value.
    *
    * @param {String} path Path can be set with dot-notation
-   * @param {*} value
+   * @param {*} value Value that need to be written to the options object
    * @returns {Shape}
    */
   set(path, value) {
@@ -239,7 +239,7 @@ export default class Shape {
    * Returns Object representation of the shape.
    * This representation consists of all options fields.
    *
-   * @returns {{name: String, options: {text: String, width: Number, height: Number, x: Number, y: Number, background: String, foreground: String}}}
+   * @returns {{name: String, options: {text: String, width: Number, height: Number, x: Number, y: Number, background: String, foreground: String, animation: Object}}}
    */
   toObject() {
     return {
