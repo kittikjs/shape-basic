@@ -18,14 +18,7 @@
  * }
  */
 export default class Shape {
-  _text = '';
-  _width = 15;
-  _height = 5;
-  _x = 10;
-  _y = 10;
-  _background;
-  _foreground;
-  _animation;
+  _options = {};
 
   /**
    * Constructor is responsible for initializing base properties.
@@ -55,12 +48,34 @@ export default class Shape {
   }
 
   /**
+   * Get option value.
+   *
+   * @param {String} path Path can be set with dot-notation
+   * @returns {*}
+   */
+  get(path) {
+    return path.split('.').reduce((obj, key) => obj[key], this._options);
+  }
+
+  /**
+   * Set new option value.
+   *
+   * @param {String} path
+   * @param {*} value
+   * @returns {Shape}
+   */
+  set(path, value) {
+    this._options[path] = value;
+    return this;
+  }
+
+  /**
    * Get text content from this shape.
    *
    * @returns {String}
    */
   getText() {
-    return this._text;
+    return this.get('text');
   }
 
   /**
@@ -70,7 +85,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setText(text = '') {
-    this._text = text;
+    this.set('text', text);
     return this;
   }
 
@@ -80,7 +95,7 @@ export default class Shape {
    * @returns {Number}
    */
   getWidth() {
-    return this._width;
+    return this.get('width');
   }
 
   /**
@@ -90,7 +105,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setWidth(width = 15) {
-    this._width = width;
+    this.set('width', width);
     return this;
   }
 
@@ -100,7 +115,7 @@ export default class Shape {
    * @returns {Number}
    */
   getHeight() {
-    return this._height;
+    return this.get('height');
   }
 
   /**
@@ -110,7 +125,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setHeight(height = 5) {
-    this._height = height;
+    this.set('height', height);
     return this;
   }
 
@@ -120,7 +135,7 @@ export default class Shape {
    * @returns {{x: Number, y: Number}}
    */
   getPosition() {
-    return {x: this._x, y: this._y};
+    return {x: this.get('x'), y: this.get('y')};
   }
 
   /**
@@ -130,9 +145,9 @@ export default class Shape {
    * @param {Number} [y=10] Absolute coordinate Y
    * @returns {Shape}
    */
-  setPosition(x = this._x, y = this._y) {
-    this._x = x;
-    this._y = y;
+  setPosition(x = 10, y = 10) {
+    this.set('x', x);
+    this.set('y', y);
     return this;
   }
 
@@ -142,7 +157,7 @@ export default class Shape {
    * @returns {String}
    */
   getBackground() {
-    return this._background;
+    return this.get('background');
   }
 
   /**
@@ -152,7 +167,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setBackground(background) {
-    this._background = background;
+    this.set('background', background);
     return this;
   }
 
@@ -162,7 +177,7 @@ export default class Shape {
    * @returns {String}
    */
   getForeground() {
-    return this._foreground;
+    return this.get('foreground');
   }
 
   /**
@@ -172,7 +187,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setForeground(foreground) {
-    this._foreground = foreground;
+    this.set('foreground', foreground);
     return this;
   }
 
@@ -182,7 +197,7 @@ export default class Shape {
    * @returns {Object}
    */
   getAnimation() {
-    return this._animation;
+    return this.get('animation');
   }
 
   /**
@@ -193,7 +208,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setAnimation(animation) {
-    this._animation = animation;
+    this.set('animation', animation);
     return this;
   }
 
@@ -203,7 +218,7 @@ export default class Shape {
    * @returns {Boolean}
    */
   isAnimated() {
-    return !!this._animation;
+    return !!this.get('animation');
   }
 
   /**
