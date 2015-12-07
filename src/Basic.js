@@ -17,12 +17,9 @@ export default class Shape {
   _options = {};
 
   /**
-   * Constructor is responsible for initializing base properties.
-   * Don't forgot to call `super(...args)` when extending from this class.
-   *
    * @constructor
    * @param {Object} [options]
-   * @param {String} [options.text] Text that will be rendered in shape
+   * @param {String} [options.text] Text that will be rendered in the shape
    * @param {Number} [options.width] Shape width
    * @param {Number} [options.height] Shape height
    * @param {Number} [options.x] Absolute coordinate X
@@ -56,12 +53,22 @@ export default class Shape {
   /**
    * Set new option value.
    *
-   * @param {String} path
+   * @param {String} path Path can be set with dot-notation
    * @param {*} value
    * @returns {Shape}
    */
   set(path, value) {
-    this._options[path] = value;
+    let obj = this._options;
+    let tags = path.split('.');
+    let len = tags.length - 1;
+
+    for (let i = 0; i < len; i++) {
+      if (typeof obj[tags[i]] === 'undefined') obj[tags[i]] = {};
+      obj = obj[tags[i]];
+    }
+
+    obj[tags[len]] = value;
+
     return this;
   }
 

@@ -14,6 +14,15 @@ describe('Shape', () => {
     assert.equal(shape.getText(), 'test');
   });
 
+  it('Should properly get/set from options object', () => {
+    let shape = new Shape();
+    assert.equal(shape.get('text'), '');
+    assert.instanceOf(shape.set('animation.name', 'print'), Shape);
+    assert.equal(shape.get('animation.name'), 'print');
+    assert.instanceOf(shape.set('animation.name', 'test'), Shape);
+    assert.equal(shape.get('animation.name'), 'test');
+  });
+
   it('Should properly get/set text', () => {
     let shape = new Shape();
     assert.equal(shape.getText(), '');
