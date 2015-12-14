@@ -28,17 +28,16 @@ export default class Shape {
    * @param {Object} [options.animation] Animation options for this shape
    */
   constructor(options = {}) {
-    this._options = {};
+    this._options = options;
 
-    let {text, width, height, x, y, background, foreground, animation} = options;
-
-    this.setText(text);
-    this.setWidth(width);
-    this.setHeight(height);
-    this.setPosition(x, y);
-    this.setBackground(background);
-    this.setForeground(foreground);
-    this.setAnimation(animation);
+    this.setText(options.text);
+    this.setWidth(options.width);
+    this.setHeight(options.height);
+    this.setPosition(options.x, options.y);
+    this.setAlign(options.align);
+    this.setBackground(options.background);
+    this.setForeground(options.foreground);
+    this.setAnimation(options.animation);
   }
 
   /**
@@ -156,6 +155,35 @@ export default class Shape {
   }
 
   /**
+   * Get align property from this shape.
+   *
+   * @returns {String}
+   */
+  getAlign() {
+    return this.get('align');
+  }
+
+  /**
+   * Set align to this shape.
+   *
+   * @param {String} align
+   * @returns {Shape}
+   */
+  setAlign(align) {
+    this.set('align', align);
+    return this;
+  }
+
+  /**
+   * Check if this shape must be aligned.
+   *
+   * @returns {Boolean}
+   */
+  isAligned() {
+    return !!this.get('align');
+  }
+
+  /**
    * Get background color.
    *
    * @returns {String}
@@ -193,35 +221,6 @@ export default class Shape {
   setForeground(foreground) {
     this.set('foreground', foreground);
     return this;
-  }
-
-  /**
-   * Get align property from this shape.
-   *
-   * @returns {String}
-   */
-  getAlign() {
-    return this.get('align');
-  }
-
-  /**
-   * Set align to this shape.
-   *
-   * @param {String} align
-   * @returns {Shape}
-   */
-  setAlign(align) {
-    this.set('align', align);
-    return this;
-  }
-
-  /**
-   * Check if this shape must be aligned.
-   *
-   * @returns {Boolean}
-   */
-  isAligned() {
-    return !!this.get('align');
   }
 
   /**
