@@ -14,8 +14,6 @@
  * }
  */
 export default class Shape {
-  _options = {};
-
   /**
    * @constructor
    * @param {Object} [options]
@@ -29,6 +27,8 @@ export default class Shape {
    * @param {Object} [options.animation] Animation options for this shape
    */
   constructor(options = {}) {
+    this._options = {};
+
     let {text, width, height, x, y, background, foreground, animation} = options;
 
     this.setText(text);
