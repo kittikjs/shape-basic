@@ -24,6 +24,7 @@ export default class Shape {
    * @param {Number} [options.y] Absolute coordinate Y
    * @param {String} [options.background] Background color from {@link COLORS}
    * @param {String} [options.foreground] Foreground color from {@link COLORS}
+   * @param {String} [options.align] Set if shape is need to be aligned
    * @param {Object} [options.animation] Animation options for this shape
    */
   constructor(options = {}) {

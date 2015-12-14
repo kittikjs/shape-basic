@@ -29,16 +29,16 @@ Import module and extend another one:
 import Shape from 'kittik-shape-basic';
 
 export default class Rectangle extends Shape {
-  constructor(...args) {
-    super(...args);
-  }
-
   render(cursor) {
     cursor.write('Hello');
     // Other logic for rendering the shape
   }
 }
 ```
+
+## API
+
+For API documentation take a closer look into [Basic.md](docs/Basic.md) file.
 
 ## License
 
