@@ -26,6 +26,8 @@ export default class Shape {
    * @param {String} [options.background] Background color from {@link COLORS}
    * @param {String} [options.foreground] Foreground color from {@link COLORS}
    * @param {Object} [options.animation] Animation options for this shape
+   * @param {String} [options.animation.name] Name of animation to play
+   * @param {Object} [options.animation.options] Options for the specified animation
    */
   constructor(options = {}) {
     this._options = options;
@@ -276,12 +278,50 @@ export default class Shape {
   }
 
   /**
+   * Get animation name.
+   *
+   * @returns {String}
+   */
+  getAnimationName() {
+    return this.get('animation.name');
+  }
+
+  /**
+   * Set animation name.
+   *
+   * @param {String} name
+   * @returns {Shape}
+   */
+  setAnimationName(name) {
+    return this.set('animation.name', name);
+  }
+
+  /**
+   * Get animation options.
+   *
+   * @returns {Object}
+   */
+  getAnimationOptions() {
+    return this.get('animation.options');
+  }
+
+  /**
+   * Set animation options.
+   *
+   * @param {Object} options
+   * @returns {Shape}
+   */
+  setAnimationOptions(options) {
+    return this.set('animation.options', options);
+  }
+
+  /**
    * Check if this shape is animated.
    *
    * @returns {Boolean}
    */
   isAnimated() {
-    return !!this.get('animation');
+    return !!this.get('animation') && !!this.get('animation.name');
   }
 
   /**
@@ -308,13 +348,16 @@ export default class Shape {
         text: this.getText(),
         width: this.getWidth(),
         height: this.getHeight(),
-        x: this.getPosition().x,
-        y: this.getPosition().y,
+        x: this.getX(),
+        y: this.getY(),
         alignX: this.getAlignX(),
         alignY: this.getAlignY(),
         background: this.getBackground(),
         foreground: this.getForeground(),
-        animation: this.getAnimation()
+        animation: {
+          name: this.getAnimationName(),
+          options: this.getAnimationOptions()
+        }
       }
     };
   }
