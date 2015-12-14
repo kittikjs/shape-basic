@@ -3,7 +3,6 @@
  * Each custom shape must extends from this class.
  *
  * @since 1.0.0
- * @version 1.0.0
  * @example
  * import Shape from 'kittik-shape-basic';
  *
@@ -22,9 +21,9 @@ export default class Shape {
    * @param {Number} [options.height] Shape height
    * @param {Number} [options.x] Absolute coordinate X
    * @param {Number} [options.y] Absolute coordinate Y
+   * @param {String} [options.align] Set if shape is need to be aligned
    * @param {String} [options.background] Background color from {@link COLORS}
    * @param {String} [options.foreground] Foreground color from {@link COLORS}
-   * @param {String} [options.align] Set if shape is need to be aligned
    * @param {Object} [options.animation] Animation options for this shape
    */
   constructor(options = {}) {
@@ -34,7 +33,8 @@ export default class Shape {
     this.setWidth(options.width);
     this.setHeight(options.height);
     this.setPosition(options.x, options.y);
-    this.setAlign(options.align);
+    this.setAlignX(options.alignX);
+    this.setAlignY(options.alignY);
     this.setBackground(options.background);
     this.setForeground(options.foreground);
     this.setAnimation(options.animation);
@@ -88,8 +88,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setText(text = '') {
-    this.set('text', text);
-    return this;
+    return this.set('text', text);
   }
 
   /**
@@ -108,8 +107,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setWidth(width = 15) {
-    this.set('width', width);
-    return this;
+    return this.set('width', width);
   }
 
   /**
@@ -128,8 +126,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setHeight(height = 5) {
-    this.set('height', height);
-    return this;
+    return this.set('height', height);
   }
 
   /**
@@ -149,29 +146,45 @@ export default class Shape {
    * @returns {Shape}
    */
   setPosition(x = 10, y = 10) {
-    this.set('x', x);
-    this.set('y', y);
-    return this;
+    return this.set('x', x).set('y', y);
   }
 
   /**
-   * Get align property from this shape.
+   * Get align property within X coordinates.
    *
    * @returns {String}
    */
-  getAlign() {
-    return this.get('align');
+  getAlignX() {
+    return this.get('alignX');
   }
 
   /**
-   * Set align to this shape.
+   * Set align property within X coordinates.
    *
-   * @param {String} align
+   * @param {String} align Can be left, center or right
    * @returns {Shape}
    */
-  setAlign(align) {
-    this.set('align', align);
-    return this;
+  setAlignX(align) {
+    return this.set('alignX', align);
+  }
+
+  /**
+   * Get align property within Y coordinates.
+   *
+   * @returns {String}
+   */
+  getAlignY() {
+    return this.get('alignY');
+  }
+
+  /**
+   * Set align property within Y coordinates.
+   *
+   * @param {String} align Can be top, middle or bottom
+   * @returns {Shape}
+   */
+  setAlignY(align) {
+    return this.set('alignY', align);
   }
 
   /**
@@ -180,7 +193,7 @@ export default class Shape {
    * @returns {Boolean}
    */
   isAligned() {
-    return !!this.get('align');
+    return !!this.getAlignX() || !!this.getAlignY();
   }
 
   /**
@@ -199,8 +212,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setBackground(background) {
-    this.set('background', background);
-    return this;
+    return this.set('background', background);
   }
 
   /**
@@ -219,8 +231,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setForeground(foreground) {
-    this.set('foreground', foreground);
-    return this;
+    return this.set('foreground', foreground);
   }
 
   /**
@@ -279,6 +290,8 @@ export default class Shape {
         height: this.getHeight(),
         x: this.getPosition().x,
         y: this.getPosition().y,
+        alignX: this.getAlignX(),
+        alignY: this.getAlignY(),
         background: this.getBackground(),
         foreground: this.getForeground(),
         animation: this.getAnimation()
