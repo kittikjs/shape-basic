@@ -96,6 +96,8 @@ describe('Shape', () => {
         height: 5,
         x: 10,
         y: 10,
+        alignX: undefined,
+        alignY: undefined,
         background: undefined,
         foreground: undefined,
         animation: undefined
@@ -115,6 +117,8 @@ describe('Shape', () => {
         height: 50,
         x: 0,
         y: 0,
+        alignX: undefined,
+        alignY: undefined,
         background: undefined,
         foreground: undefined,
         animation: {name: 'print'}
