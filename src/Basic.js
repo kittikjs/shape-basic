@@ -21,7 +21,8 @@ export default class Shape {
    * @param {Number} [options.height] Shape height
    * @param {Number} [options.x] Absolute coordinate X
    * @param {Number} [options.y] Absolute coordinate Y
-   * @param {String} [options.align] Set if shape is need to be aligned
+   * @param {String} [options.alignX] Set if shape is need to be aligned by X coordinates
+   * @param {String} [options.alignY] Set if shape is need to be aligned by Y coordinates
    * @param {String} [options.background] Background color from {@link COLORS}
    * @param {String} [options.foreground] Foreground color from {@link COLORS}
    * @param {Object} [options.animation] Animation options for this shape
@@ -29,15 +30,16 @@ export default class Shape {
   constructor(options = {}) {
     this._options = options;
 
-    this.setText(options.text);
-    this.setWidth(options.width);
-    this.setHeight(options.height);
-    this.setPosition(options.x, options.y);
-    this.setAlignX(options.alignX);
-    this.setAlignY(options.alignY);
-    this.setBackground(options.background);
-    this.setForeground(options.foreground);
-    this.setAnimation(options.animation);
+    this.setText(this._options.text);
+    this.setWidth(this._options.width);
+    this.setHeight(this._options.height);
+    this.setX(this._options.x);
+    this.setY(this._options.y);
+    this.setAlignX(this._options.alignX);
+    this.setAlignY(this._options.alignY);
+    this.setBackground(this._options.background);
+    this.setForeground(this._options.foreground);
+    this.setAnimation(this._options.animation);
   }
 
   /**
@@ -130,23 +132,41 @@ export default class Shape {
   }
 
   /**
-   * Get current position of shape.
+   * Get X coordinate.
    *
-   * @returns {{x: Number, y: Number}}
+   * @returns {Number}
    */
-  getPosition() {
-    return {x: this.get('x'), y: this.get('y')};
+  getX() {
+    return this.get('x');
   }
 
   /**
-   * Set new shape position.
+   * Set X coordinate.
    *
-   * @param {Number} [x=10] Absolute coordinate X
-   * @param {Number} [y=10] Absolute coordinate Y
+   * @param {Number} [x=10]
    * @returns {Shape}
    */
-  setPosition(x = 10, y = 10) {
-    return this.set('x', x).set('y', y);
+  setX(x = 10) {
+    return this.set('x', x);
+  }
+
+  /**
+   * Get Y coordinate.
+   *
+   * @returns {Number}
+   */
+  getY() {
+    return this.get('y');
+  }
+
+  /**
+   * Set Y coordinate.
+   *
+   * @param {Number} [y=10]
+   * @returns {Shape}
+   */
+  setY(y = 10) {
+    return this.set('y');
   }
 
   /**
