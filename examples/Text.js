@@ -4,6 +4,7 @@ const Cursor = require('kittik-cursor').Cursor;
 const Shape = require('../lib/Basic').default;
 const cursor = new Cursor().resetTTY();
 
+// Create class that extends from Shape and implement render() method
 class Text extends Shape {
   render(cursor) {
     const text = this.getText();

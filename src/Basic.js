@@ -195,6 +195,35 @@ export default class Shape {
   }
 
   /**
+   * Get align property from this shape.
+   *
+   * @returns {String}
+   */
+  getAlign() {
+    return this.get('align');
+  }
+
+  /**
+   * Set align to this shape.
+   *
+   * @param {String} align
+   * @returns {Shape}
+   */
+  setAlign(align) {
+    this.set('align', align);
+    return this;
+  }
+
+  /**
+   * Check if this shape must be aligned.
+   *
+   * @returns {Boolean}
+   */
+  isAligned() {
+    return !!this.get('align');
+  }
+
+  /**
    * Get animation options from this shape.
    *
    * @returns {Object}
