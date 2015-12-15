@@ -323,7 +323,7 @@ export default class Shape {
    * @returns {Boolean}
    */
   isAnimated() {
-    return !!this.get('animation') && !!this.get('animation.name');
+    return !!(this.get('animation') && this.get('animation.name'));
   }
 
   /**
@@ -341,7 +341,7 @@ export default class Shape {
    * Returns Object representation of the shape.
    * This representation consists of all options fields.
    *
-   * @returns {{name: String, options: {text: String, width: Number, height: Number, x: Number, y: Number, background: String, foreground: String, animation: Object}}}
+   * @returns {Object}
    */
   toObject() {
     return {
