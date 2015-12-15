@@ -87,23 +87,75 @@ Set new shape height.
 
 **Returns**: `Shape`
 
-### Shape.getPosition() 
+### Shape.getX() 
 
-Get current position of shape.
+Get X coordinate.
 
-**Returns**: `Object`
+**Returns**: `Number`
 
-### Shape.setPosition(x, y) 
+### Shape.setX(x) 
 
-Set new shape position.
+Set X coordinate.
 
 **Parameters**
 
-**x**: `Number`, Absolute coordinate X
-
-**y**: `Number`, Absolute coordinate Y
+**x**: `Number`, Set X coordinate.
 
 **Returns**: `Shape`
+
+### Shape.getY() 
+
+Get Y coordinate.
+
+**Returns**: `Number`
+
+### Shape.setY(y) 
+
+Set Y coordinate.
+
+**Parameters**
+
+**y**: `Number`, Set Y coordinate.
+
+**Returns**: `Shape`
+
+### Shape.getAlignX() 
+
+Get align property within X coordinates.
+
+**Returns**: `String`
+
+### Shape.setAlignX(align) 
+
+Set align property within X coordinates.
+
+**Parameters**
+
+**align**: `String`, Can be left, center or right
+
+**Returns**: `Shape`
+
+### Shape.getAlignY() 
+
+Get align property within Y coordinates.
+
+**Returns**: `String`
+
+### Shape.setAlignY(align) 
+
+Set align property within Y coordinates.
+
+**Parameters**
+
+**align**: `String`, Can be top, middle or bottom
+
+**Returns**: `Shape`
+
+### Shape.isAligned() 
+
+Check if this shape must be aligned.
+
+**Returns**: `Boolean`
 
 ### Shape.getBackground() 
 
@@ -143,7 +195,7 @@ Get animation options from this shape.
 
 **Returns**: `Object`
 
-### Shape.setAnimation(animation, animation.name) 
+### Shape.setAnimation(animation, animation.name, animation.options) 
 
 Set animation options to the shape.
 
@@ -152,6 +204,40 @@ Set animation options to the shape.
 **animation**: `Object`, Set animation options to the shape.
 
 **animation.name**: `String`, Animation name
+
+**animation.options**: `String`, Animation options
+
+**Returns**: `Shape`
+
+### Shape.getAnimationName() 
+
+Get animation name.
+
+**Returns**: `String`
+
+### Shape.setAnimationName(name) 
+
+Set animation name.
+
+**Parameters**
+
+**name**: `String`, Set animation name.
+
+**Returns**: `Shape`
+
+### Shape.getAnimationOptions() 
+
+Get animation options.
+
+**Returns**: `Object`
+
+### Shape.setAnimationOptions(options) 
+
+Set animation options.
+
+**Parameters**
+
+**options**: `Object`, Set animation options.
 
 **Returns**: `Shape`
 
