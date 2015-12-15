@@ -117,14 +117,14 @@ describe('Shape', () => {
   it('Should properly get/set animation name', () => {
     let shape = new Shape();
     assert.isUndefined(shape.getAnimationName());
-    assert.instanceOf(assert.setAnimationName('print'), Shape);
+    assert.instanceOf(shape.setAnimationName('print'), Shape);
     assert.equal(shape.getAnimationName(), 'print');
   });
 
   it('Should properly get/set animation options', () => {
     let shape = new Shape();
     assert.isUndefined(shape.getAnimationOptions());
-    assert.instanceOf(assert.setAnimationOptions({interval: 100}), Shape);
+    assert.instanceOf(shape.setAnimationOptions({interval: 100}), Shape);
     assert.deepEqual(shape.getAnimationOptions(), {interval: 100});
   });
 
