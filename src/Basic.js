@@ -51,7 +51,7 @@ export default class Shape {
    * @returns {*}
    */
   get(path) {
-    return path.split('.').reduce((obj, key) => obj[key], this._options);
+    return path.split('.').reduce((obj, key) => obj && obj[key], this._options);
   }
 
   /**
