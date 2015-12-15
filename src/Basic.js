@@ -187,7 +187,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setAlignX(align = 'none') {
-    if (!['none', 'left', 'center', 'right'].includes(align)) throw new Error(`Unknown align type: ${align}`);
+    if (['none', 'left', 'center', 'right'].indexOf(align) === -1) throw new Error(`Unknown align type: ${align}`);
     return this.set('alignX', align);
   }
 
@@ -207,7 +207,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setAlignY(align = 'none') {
-    if (!['none', 'top', 'middle', 'bottom'].includes(align)) throw new Error(`Unknown align type: ${align}`);
+    if (['none', 'top', 'middle', 'bottom'].indexOf(align) === -1) throw new Error(`Unknown align type: ${align}`);
     return this.set('alignY', align);
   }
 
