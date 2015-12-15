@@ -356,10 +356,7 @@ export default class Shape {
         alignY: this.getAlignY(),
         background: this.getBackground(),
         foreground: this.getForeground(),
-        animation: {
-          name: this.getAnimationName(),
-          options: this.getAnimationOptions()
-        }
+        animation: this.getAnimation()
       }
     };
   }
