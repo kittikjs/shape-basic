@@ -168,7 +168,7 @@ export default class Shape {
    * @returns {Shape}
    */
   setY(y = 10) {
-    return this.set('y');
+    return this.set('y', y);
   }
 
   /**
@@ -183,10 +183,11 @@ export default class Shape {
   /**
    * Set align property within X coordinates.
    *
-   * @param {String} align Can be left, center or right
+   * @param {String} [align=none] Can be left, center or right
    * @returns {Shape}
    */
-  setAlignX(align) {
+  setAlignX(align = 'none') {
+    if (!['none', 'left', 'center', 'right'].includes(align)) throw new Error(`Unknown align type: ${align}`);
     return this.set('alignX', align);
   }
 
@@ -202,10 +203,11 @@ export default class Shape {
   /**
    * Set align property within Y coordinates.
    *
-   * @param {String} align Can be top, middle or bottom
+   * @param {String} [align=none] Can be top, middle or bottom
    * @returns {Shape}
    */
-  setAlignY(align) {
+  setAlignY(align = 'none') {
+    if (!['none', 'top', 'middle', 'bottom'].includes(align)) throw new Error(`Unknown align type: ${align}`);
     return this.set('alignY', align);
   }
 
@@ -215,7 +217,7 @@ export default class Shape {
    * @returns {Boolean}
    */
   isAligned() {
-    return !!this.getAlignX() || !!this.getAlignY();
+    return !(this.getAlignX() === 'none' && this.getAlignY() === 'none');
   }
 
   /**
@@ -270,11 +272,11 @@ export default class Shape {
    *
    * @param {Object} animation
    * @param {String} animation.name Animation name
+   * @param {String} [animation.options] Animation options
    * @returns {Shape}
    */
   setAnimation(animation) {
-    this.set('animation', animation);
-    return this;
+    return this.set('animation', animation);
   }
 
   /**
