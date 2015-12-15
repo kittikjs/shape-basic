@@ -44,11 +44,18 @@ describe('Shape', () => {
     assert.equal(shape.getHeight(), 15);
   });
 
-  it('Should properly get/set position', () => {
+  it('Should properly get/set x coordinate', () => {
     let shape = new Shape();
-    assert.deepEqual(shape.getPosition(), {x: 10, y: 10});
-    assert.instanceOf(shape.setPosition(20, 30), Shape);
-    assert.deepEqual(shape.getPosition(), {x: 20, y: 30});
+    assert.equal(shape.getX(), 10);
+    assert.instanceOf(shape.setX(20), Shape);
+    assert.equal(shape.getX(), 20);
+  });
+
+  it('Should properly get/set y coordinate', () => {
+    let shape = new Shape();
+    assert.equal(shape.getY(), 10);
+    assert.instanceOf(shape.setY(20), Shape);
+    assert.equal(shape.getY(), 20);
   });
 
   it('Should properly get/set background', () => {
@@ -96,8 +103,8 @@ describe('Shape', () => {
         height: 5,
         x: 10,
         y: 10,
-        alignX: undefined,
-        alignY: undefined,
+        alignX: 'none',
+        alignY: 'none',
         background: undefined,
         foreground: undefined,
         animation: undefined
@@ -117,11 +124,13 @@ describe('Shape', () => {
         height: 50,
         x: 0,
         y: 0,
-        alignX: undefined,
-        alignY: undefined,
+        alignX: 'none',
+        alignY: 'none',
         background: undefined,
         foreground: undefined,
-        animation: {name: 'print'}
+        animation: {
+          name: 'print'
+        }
       }
     });
   });
@@ -130,14 +139,14 @@ describe('Shape', () => {
     let shape = new Shape();
     let json = shape.toJSON();
 
-    assert.equal(json, '{"name":"Shape","options":{"text":"","width":15,"height":5,"x":10,"y":10}}');
+    assert.equal(json, '{"name":"Shape","options":{"text":"","width":15,"height":5,"x":10,"y":10,"alignX":"none","alignY":"none"}}');
   });
 
   it('Should properly serialize shape to JSON with custom options', () => {
     let shape = new Shape({text: 'test', x: 0, y: 0, width: 30, height: 50});
     let json = shape.toJSON();
 
-    assert.equal(json, '{"name":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0}}');
+    assert.equal(json, '{"name":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0,"alignX":"none","alignY":"none"}}');
   });
 
   it('Should properly create Shape instance from static create()', () => {
@@ -169,7 +178,9 @@ describe('Shape', () => {
         foreground: undefined,
         animation: {
           name: 'print',
-          interval: 100
+          options: {
+            interval: 100
+          }
         }
       }
     };
@@ -179,10 +190,12 @@ describe('Shape', () => {
     assert.equal(shape.getText(), 'test');
     assert.equal(shape.getWidth(), 30);
     assert.equal(shape.getHeight(), 50);
-    assert.deepEqual(shape.getPosition(), {x: 0, y: 0});
+    assert.equal(shape.getX(), 0);
+    assert.equal(shape.getY(), 0);
     assert.isUndefined(shape.getBackground());
     assert.isUndefined(shape.getForeground());
-    assert.deepEqual(shape.getAnimation(), {name: 'print', interval: 100});
+    assert.equal(shape.getAnimationName(), 'print');
+    assert.deepEqual(shape.getAnimationOptions(), {interval: 100});
   });
 
   it('Should properly create Shape instance from JSON representation', () => {
@@ -193,7 +206,8 @@ describe('Shape', () => {
     assert.equal(shape.getText(), 'test');
     assert.equal(shape.getWidth(), 30);
     assert.equal(shape.getHeight(), 50);
-    assert.deepEqual(shape.getPosition(), {x: 0, y: 0});
+    assert.equal(shape.getX(), 0);
+    assert.equal(shape.getY(), 0);
     assert.isUndefined(shape.getBackground());
     assert.isUndefined(shape.getForeground());
   });
