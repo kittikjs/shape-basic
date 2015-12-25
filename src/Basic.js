@@ -21,8 +21,6 @@ export default class Shape {
    * @param {Number} [options.height] Shape height
    * @param {Number} [options.x] Absolute coordinate X
    * @param {Number} [options.y] Absolute coordinate Y
-   * @param {String} [options.alignX] Set if shape is need to be aligned by X coordinates
-   * @param {String} [options.alignY] Set if shape is need to be aligned by Y coordinates
    * @param {String} [options.background] Background color from {@link COLORS}
    * @param {String} [options.foreground] Foreground color from {@link COLORS}
    * @param {Object} [options.animation] Animation options for this shape
@@ -37,8 +35,6 @@ export default class Shape {
     this.setHeight(this._options.height);
     this.setX(this._options.x);
     this.setY(this._options.y);
-    this.setAlignX(this._options.alignX);
-    this.setAlignY(this._options.alignY);
     this.setBackground(this._options.background);
     this.setForeground(this._options.foreground);
     this.setAnimation(this._options.animation);
@@ -169,55 +165,6 @@ export default class Shape {
    */
   setY(y = 10) {
     return this.set('y', y);
-  }
-
-  /**
-   * Get align property within X coordinates.
-   *
-   * @returns {String}
-   */
-  getAlignX() {
-    return this.get('alignX');
-  }
-
-  /**
-   * Set align property within X coordinates.
-   *
-   * @param {String} [align=none] Can be left, center or right
-   * @returns {Shape}
-   */
-  setAlignX(align = 'none') {
-    if (['none', 'left', 'center', 'right'].indexOf(align) === -1) throw new Error(`Unknown align type: ${align}`);
-    return this.set('alignX', align);
-  }
-
-  /**
-   * Get align property within Y coordinates.
-   *
-   * @returns {String}
-   */
-  getAlignY() {
-    return this.get('alignY');
-  }
-
-  /**
-   * Set align property within Y coordinates.
-   *
-   * @param {String} [align=none] Can be top, middle or bottom
-   * @returns {Shape}
-   */
-  setAlignY(align = 'none') {
-    if (['none', 'top', 'middle', 'bottom'].indexOf(align) === -1) throw new Error(`Unknown align type: ${align}`);
-    return this.set('alignY', align);
-  }
-
-  /**
-   * Check if this shape must be aligned.
-   *
-   * @returns {Boolean}
-   */
-  isAligned() {
-    return !(this.getAlignX() === 'none' && this.getAlignY() === 'none');
   }
 
   /**
@@ -352,8 +299,6 @@ export default class Shape {
         height: this.getHeight(),
         x: this.getX(),
         y: this.getY(),
-        alignX: this.getAlignX(),
-        alignY: this.getAlignY(),
         background: this.getBackground(),
         foreground: this.getForeground(),
         animation: this.getAnimation()
