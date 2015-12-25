@@ -58,41 +58,6 @@ describe('Shape', () => {
     assert.equal(shape.getY(), 20);
   });
 
-  it('Should properly get/set alignX property', () => {
-    let shape = new Shape();
-    assert.equal(shape.getAlignX(), 'none');
-    assert.instanceOf(shape.setAlignX('center'), Shape);
-    assert.equal(shape.getAlignX(), 'center');
-  });
-
-  it('Should properly throw error on set wrong alignX property', () => {
-    let shape = new Shape();
-    assert.throws(() => shape.setAlignX('wrong'), Error, 'Unknown align type: wrong');
-  });
-
-  it('Should properly get/set alignY property', () => {
-    let shape = new Shape();
-    assert.equal(shape.getAlignY(), 'none');
-    assert.instanceOf(shape.setAlignY('middle'), Shape);
-    assert.equal(shape.getAlignY(), 'middle');
-  });
-
-  it('Should properly throw error on set wrong alignY property', () => {
-    let shape = new Shape();
-    assert.throws(() => shape.setAlignY('wrong'), Error, 'Unknown align type: wrong');
-  });
-
-  it('Should properly check if shape is must be aligned', () => {
-    let shape = new Shape();
-    assert.notOk(shape.isAligned());
-    assert.instanceOf(shape.setAlignX('center'), Shape);
-    assert.instanceOf(shape.setAlignY('middle'), Shape);
-    assert.ok(shape.isAligned());
-    assert.instanceOf(shape.setAlignX('none'), Shape);
-    assert.instanceOf(shape.setAlignY('none'), Shape);
-    assert.notOk(shape.isAligned());
-  });
-
   it('Should properly get/set background', () => {
     let shape = new Shape();
     assert.notOk(shape.getBackground());
@@ -152,8 +117,6 @@ describe('Shape', () => {
         height: 5,
         x: 10,
         y: 10,
-        alignX: 'none',
-        alignY: 'none',
         background: undefined,
         foreground: undefined,
         animation: undefined
@@ -173,8 +136,6 @@ describe('Shape', () => {
         height: 50,
         x: 0,
         y: 0,
-        alignX: 'none',
-        alignY: 'none',
         background: undefined,
         foreground: undefined,
         animation: {
@@ -188,14 +149,14 @@ describe('Shape', () => {
     let shape = new Shape();
     let json = shape.toJSON();
 
-    assert.equal(json, '{"name":"Shape","options":{"text":"","width":15,"height":5,"x":10,"y":10,"alignX":"none","alignY":"none"}}');
+    assert.equal(json, '{"name":"Shape","options":{"text":"","width":15,"height":5,"x":10,"y":10}}');
   });
 
   it('Should properly serialize shape to JSON with custom options', () => {
     let shape = new Shape({text: 'test', x: 0, y: 0, width: 30, height: 50});
     let json = shape.toJSON();
 
-    assert.equal(json, '{"name":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0,"alignX":"none","alignY":"none"}}');
+    assert.equal(json, '{"name":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0}}');
   });
 
   it('Should properly create Shape instance from static create()', () => {
@@ -223,8 +184,6 @@ describe('Shape', () => {
         height: 50,
         x: 1,
         y: 1,
-        alignX: 'center',
-        alignY: 'middle',
         background: 1,
         foreground: 16,
         animation: {
@@ -243,13 +202,10 @@ describe('Shape', () => {
     assert.equal(shape.getHeight(), 50);
     assert.equal(shape.getX(), 1);
     assert.equal(shape.getY(), 1);
-    assert.equal(shape.getAlignX(), 'center');
-    assert.equal(shape.getAlignY(), 'middle');
     assert.equal(shape.getBackground(), 1);
     assert.equal(shape.getForeground(), 16);
     assert.equal(shape.getAnimationName(), 'print');
     assert.deepEqual(shape.getAnimationOptions(), {interval: 100});
-    assert.ok(shape.isAligned());
     assert.ok(shape.isAnimated());
   });
 
@@ -263,7 +219,6 @@ describe('Shape', () => {
     assert.equal(shape.getHeight(), 50);
     assert.equal(shape.getX(), 0);
     assert.equal(shape.getY(), 0);
-    assert.equal(shape.getAlignX(), 'center');
     assert.isUndefined(shape.getBackground());
     assert.isUndefined(shape.getForeground());
   });
