@@ -28,16 +28,14 @@ export default class Shape {
    * @param {Object} [options.animation.options] Options for the specified animation
    */
   constructor(options = {}) {
-    this._options = options;
-
-    this.setText(this._options.text);
-    this.setWidth(this._options.width);
-    this.setHeight(this._options.height);
-    this.setX(this._options.x);
-    this.setY(this._options.y);
-    this.setBackground(this._options.background);
-    this.setForeground(this._options.foreground);
-    this.setAnimation(this._options.animation);
+    this.setText(options.text);
+    this.setWidth(options.width);
+    this.setHeight(options.height);
+    this.setX(options.x);
+    this.setY(options.y);
+    this.setBackground(options.background);
+    this.setForeground(options.foreground);
+    this.setAnimation(options.animation);
   }
 
   /**
@@ -47,7 +45,7 @@ export default class Shape {
    * @returns {*}
    */
   get(path) {
-    return path.split('.').reduce((obj, key) => obj && obj[key], this._options);
+    return path.split('.').reduce((obj, key) => obj && obj[key], this);
   }
 
   /**
@@ -58,7 +56,7 @@ export default class Shape {
    * @returns {Shape}
    */
   set(path, value) {
-    let obj = this._options;
+    let obj = this;
     let tags = path.split('.');
     let len = tags.length - 1;
 
