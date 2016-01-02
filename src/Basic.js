@@ -133,7 +133,13 @@ export default class Shape {
    * @returns {Number}
    */
   getX() {
-    return this.get('x');
+    const x = this.get('x');
+
+    if (x === 'left') return 1;
+    if (x === 'center') return process.stdout.columns / 2 - this.getWidth() / 2;
+    if (x === 'right') return process.stdout.columns - this.getWidth();
+
+    return x;
   }
 
   /**
@@ -152,7 +158,13 @@ export default class Shape {
    * @returns {Number}
    */
   getY() {
-    return this.get('y');
+    const y = this.get('y');
+
+    if (y === 'top') return 1;
+    if (y === 'middle') return process.stdout.rows / 2 - this.getHeight() / 2;
+    if (y === 'bottom') return process.stdout.rows - this.getHeight();
+
+    return y;
   }
 
   /**
