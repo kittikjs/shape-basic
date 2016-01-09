@@ -138,6 +138,7 @@ export default class Shape {
     if (x === 'left') return 1;
     if (x === 'center') return process.stdout.columns / 2 - this.getWidth() / 2;
     if (x === 'right') return process.stdout.columns - this.getWidth();
+    if (/\d+%$/.test(x)) return x.slice(0, -1) * process.stdout.columns / 100;
 
     return x;
   }
@@ -163,6 +164,7 @@ export default class Shape {
     if (y === 'top') return 1;
     if (y === 'middle') return process.stdout.rows / 2 - this.getHeight() / 2;
     if (y === 'bottom') return process.stdout.rows - this.getHeight();
+    if (/\d+%$/.test(y)) return y.slice(0, -1) * process.stdout.rows / 100;
 
     return y;
   }
@@ -304,14 +306,14 @@ export default class Shape {
     return {
       name: this.constructor.name,
       options: {
-        text: this.getText(),
-        width: this.getWidth(),
-        height: this.getHeight(),
-        x: this.getX(),
-        y: this.getY(),
-        background: this.getBackground(),
-        foreground: this.getForeground(),
-        animation: this.getAnimation()
+        text: this.get('text'),
+        width: this.get('width'),
+        height: this.get('height'),
+        x: this.get('x'),
+        y: this.get('y'),
+        background: this.get('background'),
+        foreground: this.get('foreground'),
+        animation: this.get('animation')
       }
     };
   }
