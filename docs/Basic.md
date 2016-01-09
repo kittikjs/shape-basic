@@ -119,44 +119,6 @@ Set Y coordinate.
 
 **Returns**: `Shape`
 
-### Shape.getAlignX() 
-
-Get align property within X coordinates.
-
-**Returns**: `String`
-
-### Shape.setAlignX(align) 
-
-Set align property within X coordinates.
-
-**Parameters**
-
-**align**: `String`, Can be left, center or right
-
-**Returns**: `Shape`
-
-### Shape.getAlignY() 
-
-Get align property within Y coordinates.
-
-**Returns**: `String`
-
-### Shape.setAlignY(align) 
-
-Set align property within Y coordinates.
-
-**Parameters**
-
-**align**: `String`, Can be top, middle or bottom
-
-**Returns**: `Shape`
-
-### Shape.isAligned() 
-
-Check if this shape must be aligned.
-
-**Returns**: `Boolean`
-
 ### Shape.getBackground() 
 
 Get background color.
