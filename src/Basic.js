@@ -17,12 +17,12 @@ export default class Shape {
    * @constructor
    * @param {Object} [options]
    * @param {String} [options.text] Text that will be rendered in the shape
-   * @param {Number} [options.width] Shape width
-   * @param {Number} [options.height] Shape height
-   * @param {Number} [options.x] Absolute coordinate X
-   * @param {Number} [options.y] Absolute coordinate Y
-   * @param {String} [options.background] Background color from {@link COLORS}
-   * @param {String} [options.foreground] Foreground color from {@link COLORS}
+   * @param {Number|String} [options.width] Shape width
+   * @param {Number|String} [options.height] Shape height
+   * @param {Number|String} [options.x] Absolute coordinate X
+   * @param {Number|String} [options.y] Absolute coordinate Y
+   * @param {String} [options.background] Background color
+   * @param {String} [options.foreground] Foreground color
    * @param {Object} [options.animation] Animation options for this shape
    * @param {String} [options.animation.name] Name of animation to play
    * @param {Object} [options.animation.options] Options for the specified animation
@@ -95,7 +95,11 @@ export default class Shape {
    * @returns {Number}
    */
   getWidth() {
-    return this.get('width');
+    const width = this.get('width');
+
+    if (/\d+%$/.test(width)) return width.slice(0, -1) * process.stdout.columns / 100;
+
+    return width;
   }
 
   /**
@@ -114,7 +118,11 @@ export default class Shape {
    * @returns {Number}
    */
   getHeight() {
-    return this.get('height');
+    const height = this.get('height');
+
+    if (/\d+%$/.test(height)) return height.slice(0, -1) * process.stdout.rows / 100;
+
+    return height;
   }
 
   /**
