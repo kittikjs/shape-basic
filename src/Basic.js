@@ -17,15 +17,13 @@ export default class Shape {
    * @constructor
    * @param {Object} [options]
    * @param {String} [options.text] Text that will be rendered in the shape
-   * @param {Number|String} [options.width] Shape width
-   * @param {Number|String} [options.height] Shape height
-   * @param {Number|String} [options.x] Absolute coordinate X
-   * @param {Number|String} [options.y] Absolute coordinate Y
-   * @param {String} [options.background] Background color
-   * @param {String} [options.foreground] Foreground color
-   * @param {Object} [options.animation] Animation options for this shape
-   * @param {String} [options.animation.name] Name of animation to play
-   * @param {Object} [options.animation.options] Options for the specified animation
+   * @param {Number|String} [options.width] Shape width can be 100 (cells) or 100%
+   * @param {Number|String} [options.height] Shape height can be 100 (cells) or 100%
+   * @param {Number|String} [options.x] Absolute coordinate X can be 100 (cells), left, center, right or percents
+   * @param {Number|String} [options.y] Absolute coordinate Y can be 100 (cells), top, middle, bottom or percents
+   * @param {Number|String} [options.background] Background color can be number from color table or color name
+   * @param {Number|String} [options.foreground] Foreground color can be number from color table or color name
+   * @param {Object} [options.animation] Animation options for this shape may be an object with in, focus and out properties
    */
   constructor(options = {}) {
     this.setText(options.text);
@@ -199,7 +197,7 @@ export default class Shape {
   /**
    * Set new background color.
    *
-   * @param {String} background Background color from {@link COLORS}
+   * @param {String} background Background value from cursor colors or color name
    * @returns {Shape}
    */
   setBackground(background) {
@@ -218,7 +216,7 @@ export default class Shape {
   /**
    * Set new foreground color.
    *
-   * @param {String} foreground Foreground color from {@link COLORS}
+   * @param {String} foreground Foreground value from cursor colors or color name
    * @returns {Shape}
    */
   setForeground(foreground) {
@@ -237,51 +235,20 @@ export default class Shape {
   /**
    * Set animation options to the shape.
    *
-   * @param {Object} animation
-   * @param {String} animation.name Animation name
-   * @param {String} [animation.options] Animation options
+   * @param {Object} [animation]
+   * @param {Object} [animation.in] Animation which is used for showing the shape
+   * @param {String} [animation.in.name] Animation name for showing the shape
+   * @param {Object} [animation.in.options] Animation options
+   * @param {Object} [animation.focus] Animation which is used for focusing the shape
+   * @param {String} [animation.focus.name] Animation name for focusing the shape
+   * @param {Object} [animation.focus.options] Animation options
+   * @param {Object} [animation.out] Animation which is used for hiding the shape
+   * @param {String} [animation.out.name] Animation name for out the shape
+   * @param {Object} [animation.out.options] Animation options
    * @returns {Shape}
    */
-  setAnimation(animation) {
+  setAnimation(animation = {}) {
     return this.set('animation', animation);
-  }
-
-  /**
-   * Get animation name.
-   *
-   * @returns {String}
-   */
-  getAnimationName() {
-    return this.get('animation.name');
-  }
-
-  /**
-   * Set animation name.
-   *
-   * @param {String} name
-   * @returns {Shape}
-   */
-  setAnimationName(name) {
-    return this.set('animation.name', name);
-  }
-
-  /**
-   * Get animation options.
-   *
-   * @returns {Object}
-   */
-  getAnimationOptions() {
-    return this.get('animation.options');
-  }
-
-  /**
-   * Set animation options.
-   *
-   * @param {Object} options
-   * @returns {Shape}
-   */
-  setAnimationOptions(options) {
-    return this.set('animation.options', options);
   }
 
   /**
@@ -290,7 +257,7 @@ export default class Shape {
    * @returns {Boolean}
    */
   isAnimated() {
-    return !!(this.get('animation') && this.get('animation.name'));
+    return !!(this.get('animation.in') || this.get('animation.focus') || this.get('animation.out'));
   }
 
   /**
@@ -368,7 +335,6 @@ export default class Shape {
    * @returns {Shape}
    */
   static fromJSON(json) {
-    let obj = JSON.parse(json);
-    return this.fromObject(obj);
+    return this.fromObject(JSON.parse(json));
   }
 }
