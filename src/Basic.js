@@ -23,7 +23,6 @@ export default class Shape {
    * @param {Number|String} [options.y] Absolute coordinate Y can be 100 (cells), top, middle, bottom or percents
    * @param {Number|String} [options.background] Background color can be number from color table or color name
    * @param {Number|String} [options.foreground] Foreground color can be number from color table or color name
-   * @param {Object} [options.animation] Animation options for this shape may be an object with in, focus and out properties
    */
   constructor(options = {}) {
     this.setText(options.text);
@@ -33,7 +32,6 @@ export default class Shape {
     this.setY(options.y);
     this.setBackground(options.background);
     this.setForeground(options.foreground);
-    this.setAnimation(options.animation);
   }
 
   /**
@@ -224,43 +222,6 @@ export default class Shape {
   }
 
   /**
-   * Get animation options from this shape.
-   *
-   * @returns {Object}
-   */
-  getAnimation() {
-    return this.get('animation');
-  }
-
-  /**
-   * Set animation options to the shape.
-   *
-   * @param {Object} [animation]
-   * @param {Object} [animation.in] Animation which is used for showing the shape
-   * @param {String} [animation.in.name] Animation name for showing the shape
-   * @param {Object} [animation.in.options] Animation options
-   * @param {Object} [animation.focus] Animation which is used for focusing the shape
-   * @param {String} [animation.focus.name] Animation name for focusing the shape
-   * @param {Object} [animation.focus.options] Animation options
-   * @param {Object} [animation.out] Animation which is used for hiding the shape
-   * @param {String} [animation.out.name] Animation name for out the shape
-   * @param {Object} [animation.out.options] Animation options
-   * @returns {Shape}
-   */
-  setAnimation(animation = {}) {
-    return this.set('animation', animation);
-  }
-
-  /**
-   * Check if this shape is animated.
-   *
-   * @returns {Boolean}
-   */
-  isAnimated() {
-    return !!(this.get('animation.in') || this.get('animation.focus') || this.get('animation.out'));
-  }
-
-  /**
    * Base render method that must be implemented in childes.
    *
    * @abstract
@@ -287,8 +248,7 @@ export default class Shape {
         x: this.get('x'),
         y: this.get('y'),
         background: this.get('background'),
-        foreground: this.get('foreground'),
-        animation: this.get('animation')
+        foreground: this.get('foreground')
       }
     };
   }
