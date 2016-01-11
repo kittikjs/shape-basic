@@ -39,8 +39,9 @@ Rectangle.create({
   x: 'center',
   y: '10%',
   width: '50%',
-  height: 5,
-  background: 'white'
+  height: '10%',
+  background: 'dark_green',
+  foreground: 'navy_blue'
 }).render(cursor);
 
 cursor.flush();
