@@ -72,20 +72,6 @@ describe('Shape', () => {
     assert.equal(shape.getForeground(), 'test');
   });
 
-  it('Should properly get/set animation', () => {
-    let shape = new Shape();
-    assert.deepEqual(shape.getAnimation(), {});
-    assert.instanceOf(shape.setAnimation({name: 'print'}), Shape);
-    assert.deepEqual(shape.getAnimation(), {name: 'print'});
-  });
-
-  it('Should properly check if shape is animated', () => {
-    let shape = new Shape();
-    assert.notOk(shape.isAnimated());
-    assert.instanceOf(shape.setAnimation({in: {}}), Shape);
-    assert.ok(shape.isAnimated());
-  });
-
   it('Should properly throw exception if render is not overridden', () => {
     let shape = new Shape();
     assert.throws(() => shape.render(), Error, 'render() method must be implemented');
@@ -96,7 +82,7 @@ describe('Shape', () => {
     let obj = shape.toObject();
 
     assert.deepEqual(obj, {
-      name: 'Shape',
+      type: 'Shape',
       options: {
         text: '',
         width: 15,
@@ -104,8 +90,7 @@ describe('Shape', () => {
         x: 10,
         y: 10,
         background: undefined,
-        foreground: undefined,
-        animation: {}
+        foreground: undefined
       }
     });
   });
@@ -115,7 +100,7 @@ describe('Shape', () => {
     let obj = shape.toObject();
 
     assert.deepEqual(obj, {
-      name: 'Shape',
+      type: 'Shape',
       options: {
         text: 'test',
         width: 30,
@@ -123,10 +108,7 @@ describe('Shape', () => {
         x: 0,
         y: 0,
         background: undefined,
-        foreground: undefined,
-        animation: {
-          name: 'print'
-        }
+        foreground: undefined
       }
     });
   });
@@ -135,14 +117,14 @@ describe('Shape', () => {
     let shape = new Shape();
     let json = shape.toJSON();
 
-    assert.equal(json, '{"name":"Shape","options":{"text":"","width":15,"height":5,"x":10,"y":10,"animation":{}}}');
+    assert.equal(json, '{"type":"Shape","options":{"text":"","width":15,"height":5,"x":10,"y":10}}');
   });
 
   it('Should properly serialize shape to JSON with custom options', () => {
     let shape = new Shape({text: 'test', x: 0, y: 0, width: 30, height: 50});
     let json = shape.toJSON();
 
-    assert.equal(json, '{"name":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0,"animation":{}}}');
+    assert.equal(json, '{"type":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0}}');
   });
 
   it('Should properly create Shape instance from static create()', () => {
@@ -157,13 +139,13 @@ describe('Shape', () => {
   });
 
   it('Should properly throw error if trying to create Shape not from its representation', () => {
-    let obj = {name: 'Rectangle', options: {}};
+    let obj = {type: 'Rectangle', options: {}};
     assert.throws(() => Shape.fromObject(obj), Error, 'Rectangle is not an Object representation of the Shape');
   });
 
   it('Should properly create Shape instance from Object representation', () => {
     let obj = {
-      name: 'Shape',
+      type: 'Shape',
       options: {
         text: 'test',
         width: 30,
@@ -171,15 +153,7 @@ describe('Shape', () => {
         x: 1,
         y: 1,
         background: 1,
-        foreground: 16,
-        animation: {
-          in: {
-            name: 'print',
-            options: {
-              interval: 100
-            }
-          }
-        }
+        foreground: 16
       }
     };
 
@@ -192,19 +166,10 @@ describe('Shape', () => {
     assert.equal(shape.getY(), 1);
     assert.equal(shape.getBackground(), 1);
     assert.equal(shape.getForeground(), 16);
-    assert.deepEqual(shape.getAnimation(), {
-      in: {
-        name: 'print',
-        options: {
-          interval: 100
-        }
-      }
-    });
-    assert.ok(shape.isAnimated());
   });
 
   it('Should properly create Shape instance from JSON representation', () => {
-    let json = '{"name":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0,"alignX":"center"}}';
+    let json = '{"type":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0}}';
     let shape = Shape.fromJSON(json);
 
     assert.instanceOf(shape, Shape);
