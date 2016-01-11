@@ -74,29 +74,15 @@ describe('Shape', () => {
 
   it('Should properly get/set animation', () => {
     let shape = new Shape();
-    assert.notOk(shape.getAnimation());
+    assert.deepEqual(shape.getAnimation(), {});
     assert.instanceOf(shape.setAnimation({name: 'print'}), Shape);
     assert.deepEqual(shape.getAnimation(), {name: 'print'});
-  });
-
-  it('Should properly get/set animation name', () => {
-    let shape = new Shape();
-    assert.isUndefined(shape.getAnimationName());
-    assert.instanceOf(shape.setAnimationName('print'), Shape);
-    assert.equal(shape.getAnimationName(), 'print');
-  });
-
-  it('Should properly get/set animation options', () => {
-    let shape = new Shape();
-    assert.isUndefined(shape.getAnimationOptions());
-    assert.instanceOf(shape.setAnimationOptions({interval: 100}), Shape);
-    assert.deepEqual(shape.getAnimationOptions(), {interval: 100});
   });
 
   it('Should properly check if shape is animated', () => {
     let shape = new Shape();
     assert.notOk(shape.isAnimated());
-    assert.instanceOf(shape.setAnimationName('print'), Shape);
+    assert.instanceOf(shape.setAnimation({in: {}}), Shape);
     assert.ok(shape.isAnimated());
   });
 
@@ -119,7 +105,7 @@ describe('Shape', () => {
         y: 10,
         background: undefined,
         foreground: undefined,
-        animation: undefined
+        animation: {}
       }
     });
   });
@@ -149,14 +135,14 @@ describe('Shape', () => {
     let shape = new Shape();
     let json = shape.toJSON();
 
-    assert.equal(json, '{"name":"Shape","options":{"text":"","width":15,"height":5,"x":10,"y":10}}');
+    assert.equal(json, '{"name":"Shape","options":{"text":"","width":15,"height":5,"x":10,"y":10,"animation":{}}}');
   });
 
   it('Should properly serialize shape to JSON with custom options', () => {
     let shape = new Shape({text: 'test', x: 0, y: 0, width: 30, height: 50});
     let json = shape.toJSON();
 
-    assert.equal(json, '{"name":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0}}');
+    assert.equal(json, '{"name":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0,"animation":{}}}');
   });
 
   it('Should properly create Shape instance from static create()', () => {
@@ -187,9 +173,11 @@ describe('Shape', () => {
         background: 1,
         foreground: 16,
         animation: {
-          name: 'print',
-          options: {
-            interval: 100
+          in: {
+            name: 'print',
+            options: {
+              interval: 100
+            }
           }
         }
       }
@@ -204,8 +192,14 @@ describe('Shape', () => {
     assert.equal(shape.getY(), 1);
     assert.equal(shape.getBackground(), 1);
     assert.equal(shape.getForeground(), 16);
-    assert.equal(shape.getAnimationName(), 'print');
-    assert.deepEqual(shape.getAnimationOptions(), {interval: 100});
+    assert.deepEqual(shape.getAnimation(), {
+      in: {
+        name: 'print',
+        options: {
+          interval: 100
+        }
+      }
+    });
     assert.ok(shape.isAnimated());
   });
 
