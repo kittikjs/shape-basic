@@ -131,7 +131,7 @@ Set new background color.
 
 **Parameters**
 
-**background**: `String`, Background color from COLORS
+**background**: `String`, Background value from cursor colors or color name
 
 **Returns**: `Shape`
 
@@ -147,7 +147,7 @@ Set new foreground color.
 
 **Parameters**
 
-**foreground**: `String`, Foreground color from COLORS
+**foreground**: `String`, Foreground value from cursor colors or color name
 
 **Returns**: `Shape`
 
@@ -157,7 +157,7 @@ Get animation options from this shape.
 
 **Returns**: `Object`
 
-### Shape.setAnimation(animation, animation.name, animation.options) 
+### Shape.setAnimation(animation, animation.in, animation.in.name, animation.in.options, animation.focus, animation.focus.name, animation.focus.options, animation.out, animation.out.name, animation.out.options) 
 
 Set animation options to the shape.
 
@@ -165,41 +165,23 @@ Set animation options to the shape.
 
 **animation**: `Object`, Set animation options to the shape.
 
-**animation.name**: `String`, Animation name
+**animation.in**: `Object`, Animation which is used for showing the shape
 
-**animation.options**: `String`, Animation options
+**animation.in.name**: `String`, Animation name for showing the shape
 
-**Returns**: `Shape`
+**animation.in.options**: `Object`, Animation options
 
-### Shape.getAnimationName() 
+**animation.focus**: `Object`, Animation which is used for focusing the shape
 
-Get animation name.
+**animation.focus.name**: `String`, Animation name for focusing the shape
 
-**Returns**: `String`
+**animation.focus.options**: `Object`, Animation options
 
-### Shape.setAnimationName(name) 
+**animation.out**: `Object`, Animation which is used for hiding the shape
 
-Set animation name.
+**animation.out.name**: `String`, Animation name for out the shape
 
-**Parameters**
-
-**name**: `String`, Set animation name.
-
-**Returns**: `Shape`
-
-### Shape.getAnimationOptions() 
-
-Get animation options.
-
-**Returns**: `Object`
-
-### Shape.setAnimationOptions(options) 
-
-Set animation options.
-
-**Parameters**
-
-**options**: `Object`, Set animation options.
+**animation.out.options**: `Object`, Animation options
 
 **Returns**: `Shape`
 
