@@ -240,7 +240,7 @@ export default class Shape {
    */
   toObject() {
     return {
-      name: this.constructor.name,
+      type: this.constructor.name,
       options: {
         text: this.get('text'),
         width: this.get('width'),
@@ -281,8 +281,8 @@ export default class Shape {
    * @returns {Shape}
    */
   static fromObject(obj) {
-    if (!obj.name || !obj.options) throw new Error('It looks like it is not an Object representation of the shape');
-    if (obj.name !== this.name) throw new Error(`${obj.name} is not an Object representation of the ${this.name}`);
+    if (!obj.type || !obj.options) throw new Error('It looks like it is not an Object representation of the shape');
+    if (obj.type !== this.name) throw new Error(`${obj.type} is not an Object representation of the ${this.name}`);
 
     return this.create(obj.options);
   }
