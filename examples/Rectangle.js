@@ -34,14 +34,14 @@ class Rectangle extends Shape {
   }
 }
 
-Rectangle.create({
-  text: 'Hello there',
-  x: 'center',
-  y: '10%',
-  width: '50%',
-  height: '10%',
-  background: 'dark_green',
-  foreground: 'navy_blue'
-}).render(cursor);
+Rectangle.create({text: '1', x: 'left', y: 'top', background: 'dark_green', foreground: 'white'}).render(cursor);
+Rectangle.create({text: '2', x: 'center', y: 'top', background: 'black', foreground: 'white'}).render(cursor);
+Rectangle.create({text: '3', x: 'right', y: 'top', background: 'navy_blue', foreground: 'white'}).render(cursor);
+Rectangle.create({text: '4', x: 'left', y: 'middle', background: 'dark_green', foreground: 'white'}).render(cursor);
+Rectangle.create({text: '5', x: 'center', y: 'middle', background: 'black', foreground: 'white'}).render(cursor);
+Rectangle.create({text: '6', x: 'right', y: 'middle', background: 'navy_blue', foreground: 'white'}).render(cursor);
+Rectangle.create({text: '7', x: 'left', y: 'bottom', background: 'dark_green', foreground: 'white'}).render(cursor);
+Rectangle.create({text: '8', x: 'center', y: 'bottom', background: 'black', foreground: 'white'}).render(cursor);
+Rectangle.create({text: '9', x: 'right', y: 'bottom', background: 'navy_blue', foreground: 'white'}).render(cursor);
 
-cursor.flush();
+cursor.moveTo(1, process.stdout.rows).flush();

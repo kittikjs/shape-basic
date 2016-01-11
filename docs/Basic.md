@@ -151,46 +151,6 @@ Set new foreground color.
 
 **Returns**: `Shape`
 
-### Shape.getAnimation() 
-
-Get animation options from this shape.
-
-**Returns**: `Object`
-
-### Shape.setAnimation(animation, animation.in, animation.in.name, animation.in.options, animation.focus, animation.focus.name, animation.focus.options, animation.out, animation.out.name, animation.out.options) 
-
-Set animation options to the shape.
-
-**Parameters**
-
-**animation**: `Object`, Set animation options to the shape.
-
-**animation.in**: `Object`, Animation which is used for showing the shape
-
-**animation.in.name**: `String`, Animation name for showing the shape
-
-**animation.in.options**: `Object`, Animation options
-
-**animation.focus**: `Object`, Animation which is used for focusing the shape
-
-**animation.focus.name**: `String`, Animation name for focusing the shape
-
-**animation.focus.options**: `Object`, Animation options
-
-**animation.out**: `Object`, Animation which is used for hiding the shape
-
-**animation.out.name**: `String`, Animation name for out the shape
-
-**animation.out.options**: `Object`, Animation options
-
-**Returns**: `Shape`
-
-### Shape.isAnimated() 
-
-Check if this shape is animated.
-
-**Returns**: `Boolean`
-
 ### Shape.render(cursor) 
 
 Base render method that must be implemented in childes.
