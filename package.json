@@ -2,7 +2,7 @@
   "name": "kittik-shape-basic",
   "version": "0.0.0-semantic-release",
   "description": "Basic shape which is needed for creating other shapes",
-  "main": "lib/Basic.js",
+  "main": "lib/Shape.js",
   "author": "ghaiklor",
   "bugs": {
     "url": "https://github.com/kittikjs/shape-basic/issues"
@@ -14,10 +14,9 @@
   },
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf ./coverage ./docs ./lib",
-    "compile": "npm run clean; npm run docs; babel src --out-dir lib",
+    "clean": "rm -rf ./lib",
+    "compile": "npm run clean; babel src --out-dir lib",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "docs": "jsdox --output docs src",
     "prepublish": "npm run compile",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "test": "babel-node ./node_modules/.bin/isparta cover _mocha"
@@ -26,12 +25,10 @@
   "devDependencies": {
     "babel-cli": "6.4.0",
     "babel-preset-es2015-node4": "2.0.2",
-    "babel-preset-stage-0": "6.3.13",
     "chai": "3.4.1",
     "coveralls": "2.11.6",
     "cz-conventional-changelog": "1.1.5",
     "isparta": "4.0.0",
-    "jsdox": "0.4.9",
     "kittik-cursor": "2.3.1",
     "mocha": "2.3.4",
     "semantic-release": "4.3.5",
