@@ -36,10 +36,6 @@ export default class Rectangle extends Shape {
 }
 ```
 
-## API
-
-For API documentation take a closer look into [Basic.md](docs/Basic.md) file.
-
 ## License
 
 The MIT License (MIT)
