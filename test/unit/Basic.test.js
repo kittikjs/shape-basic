@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
-import Shape from '../../src/Basic';
+import Shape from '../../src/Shape';
 
 describe('Shape', () => {
   it('Should properly initialize shape instance with no arguments', () => {
