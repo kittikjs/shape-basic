@@ -1,6 +1,6 @@
 "use strict";
 
-const Cursor = require('kittik-cursor').Cursor;
+const Cursor = require('kittik-cursor').default;
 const Shape = require('../lib/Shape').default;
 const cursor = new Cursor().resetTTY();
 
