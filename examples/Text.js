@@ -1,7 +1,7 @@
 "use strict";
 
-const Cursor = require('kittik-cursor').default;
-const Shape = require('../lib/Shape').default;
+const Cursor = require('kittik-cursor');
+const Shape = require('../lib/Shape');
 const cursor = new Cursor().resetTTY();
 
 // Create class that extends from Shape and implement render() method
