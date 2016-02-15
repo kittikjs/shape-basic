@@ -93,7 +93,7 @@ export default class Shape {
   getWidth() {
     const width = this.get('width');
 
-    if (/\d+%$/.test(width)) return width.slice(0, -1) * process.stdout.columns / 100;
+    if (/\d+%$/.test(width)) return Math.ceil(width.slice(0, -1) * process.stdout.columns / 100);
 
     return width;
   }
@@ -116,7 +116,7 @@ export default class Shape {
   getHeight() {
     const height = this.get('height');
 
-    if (/\d+%$/.test(height)) return height.slice(0, -1) * process.stdout.rows / 100;
+    if (/\d+%$/.test(height)) return Math.ceil(height.slice(0, -1) * process.stdout.rows / 100);
 
     return height;
   }
@@ -140,9 +140,9 @@ export default class Shape {
     const x = this.get('x');
 
     if (x === 'left') return 1;
-    if (x === 'center') return process.stdout.columns / 2 - this.getWidth() / 2;
-    if (x === 'right') return process.stdout.columns - this.getWidth();
-    if (/\d+%$/.test(x)) return x.slice(0, -1) * process.stdout.columns / 100;
+    if (x === 'center') return Math.ceil(process.stdout.columns / 2 - this.getWidth() / 2) + 1;
+    if (x === 'right') return Math.ceil(process.stdout.columns - this.getWidth()) + 1;
+    if (/\d+%$/.test(x)) return Math.ceil(x.slice(0, -1) * process.stdout.columns / 100) + 1;
 
     return x;
   }
@@ -166,9 +166,9 @@ export default class Shape {
     const y = this.get('y');
 
     if (y === 'top') return 1;
-    if (y === 'middle') return process.stdout.rows / 2 - this.getHeight() / 2;
-    if (y === 'bottom') return process.stdout.rows - this.getHeight();
-    if (/\d+%$/.test(y)) return y.slice(0, -1) * process.stdout.rows / 100;
+    if (y === 'middle') return Math.ceil(process.stdout.rows / 2 - this.getHeight() / 2) + 1;
+    if (y === 'bottom') return Math.ceil(process.stdout.rows - this.getHeight()) + 1;
+    if (/\d+%$/.test(y)) return Math.ceil(y.slice(0, -1) * process.stdout.rows / 100) + 1;
 
     return y;
   }
