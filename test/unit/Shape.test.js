@@ -41,7 +41,7 @@ describe('Shape', () => {
     assert.instanceOf(shape.setWidth(5), Shape);
     assert.equal(shape.getWidth(), 5);
     assert.instanceOf(shape.setWidth('50%'), Shape);
-    assert.equal(shape.getWidth(), process.stdout.columns / 2);
+    assert.equal(shape.getWidth(), Math.ceil(process.stdout.columns / 2));
   });
 
   it('Should properly get/set height', () => {
@@ -51,7 +51,7 @@ describe('Shape', () => {
     assert.instanceOf(shape.setHeight(15), Shape);
     assert.equal(shape.getHeight(), 15);
     assert.instanceOf(shape.setHeight('50%'), Shape);
-    assert.equal(shape.getHeight(), process.stdout.rows / 2);
+    assert.equal(shape.getHeight(), Math.ceil(process.stdout.rows / 2));
   });
 
   it('Should properly get/set x coordinate', () => {
@@ -63,11 +63,11 @@ describe('Shape', () => {
     assert.instanceOf(shape.setX('left'), Shape);
     assert.equal(shape.getX(), 1);
     assert.instanceOf(shape.setX('center'), Shape);
-    assert.equal(shape.getX(), process.stdout.columns / 2 - shape.getWidth() / 2);
+    assert.equal(shape.getX(), Math.ceil(process.stdout.columns / 2 - shape.getWidth() / 2) + 1);
     assert.instanceOf(shape.setX('right'), Shape);
-    assert.equal(shape.getX(), process.stdout.columns - shape.getWidth());
+    assert.equal(shape.getX(), Math.ceil(process.stdout.columns - shape.getWidth()) + 1);
     assert.instanceOf(shape.setX('50%'), Shape);
-    assert.equal(shape.getX(), process.stdout.columns / 2);
+    assert.equal(shape.getX(), Math.ceil(process.stdout.columns / 2) + 1);
   });
 
   it('Should properly get/set y coordinate', () => {
@@ -79,11 +79,11 @@ describe('Shape', () => {
     assert.instanceOf(shape.setY('top'), Shape);
     assert.equal(shape.getY(), 1);
     assert.instanceOf(shape.setY('middle'), Shape);
-    assert.equal(shape.getY(), process.stdout.rows / 2 - shape.getHeight() / 2);
+    assert.equal(shape.getY(), Math.ceil(process.stdout.rows / 2 - shape.getHeight() / 2) + 1);
     assert.instanceOf(shape.setY('bottom'), Shape);
-    assert.equal(shape.getY(), process.stdout.rows - shape.getHeight());
+    assert.equal(shape.getY(), Math.ceil(process.stdout.rows - shape.getHeight()) + 1);
     assert.instanceOf(shape.setY('50%'), Shape);
-    assert.equal(shape.getY(), process.stdout.rows / 2);
+    assert.equal(shape.getY(), Math.ceil(process.stdout.rows / 2) + 1);
   });
 
   it('Should properly get/set background', () => {
