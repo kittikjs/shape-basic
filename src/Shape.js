@@ -93,7 +93,7 @@ export default class Shape {
   getWidth() {
     const width = this.get('width');
 
-    if (/\d+%$/.test(width)) return Math.ceil(width.slice(0, -1) * process.stdout.columns / 100);
+    if (/\d+%$/.test(width)) return Math.floor(width.slice(0, -1) * process.stdout.columns / 100);
 
     return width;
   }
@@ -116,7 +116,7 @@ export default class Shape {
   getHeight() {
     const height = this.get('height');
 
-    if (/\d+%$/.test(height)) return Math.ceil(height.slice(0, -1) * process.stdout.rows / 100);
+    if (/\d+%$/.test(height)) return Math.floor(height.slice(0, -1) * process.stdout.rows / 100);
 
     return height;
   }
@@ -139,10 +139,10 @@ export default class Shape {
   getX() {
     const x = this.get('x');
 
-    if (x === 'left') return 1;
-    if (x === 'center') return Math.ceil(process.stdout.columns / 2 - this.getWidth() / 2) + 1;
-    if (x === 'right') return Math.ceil(process.stdout.columns - this.getWidth()) + 1;
-    if (/\d+%$/.test(x)) return Math.ceil(x.slice(0, -1) * process.stdout.columns / 100) + 1;
+    if (x === 'left') return 0;
+    if (x === 'center') return Math.floor(process.stdout.columns / 2 - this.getWidth() / 2);
+    if (x === 'right') return Math.floor(process.stdout.columns - this.getWidth());
+    if (/\d+%$/.test(x)) return Math.floor(x.slice(0, -1) * process.stdout.columns / 100);
 
     return x;
   }
@@ -165,10 +165,10 @@ export default class Shape {
   getY() {
     const y = this.get('y');
 
-    if (y === 'top') return 1;
-    if (y === 'middle') return Math.ceil(process.stdout.rows / 2 - this.getHeight() / 2) + 1;
-    if (y === 'bottom') return Math.ceil(process.stdout.rows - this.getHeight()) + 1;
-    if (/\d+%$/.test(y)) return Math.ceil(y.slice(0, -1) * process.stdout.rows / 100) + 1;
+    if (y === 'top') return 0;
+    if (y === 'middle') return Math.floor(process.stdout.rows / 2 - this.getHeight() / 2);
+    if (y === 'bottom') return Math.floor(process.stdout.rows - this.getHeight());
+    if (/\d+%$/.test(y)) return Math.floor(y.slice(0, -1) * process.stdout.rows / 100);
 
     return y;
   }
@@ -195,10 +195,10 @@ export default class Shape {
   /**
    * Set new background color.
    *
-   * @param {String} background Background value from cursor colors or color name
+   * @param {String} [background=false] Background value from cursor colors or color name
    * @returns {Shape}
    */
-  setBackground(background) {
+  setBackground(background = false) {
     return this.set('background', background);
   }
 
@@ -214,10 +214,10 @@ export default class Shape {
   /**
    * Set new foreground color.
    *
-   * @param {String} foreground Foreground value from cursor colors or color name
+   * @param {String} [foreground = false] Foreground value from cursor colors or color name
    * @returns {Shape}
    */
-  setForeground(foreground) {
+  setForeground(foreground = false) {
     return this.set('foreground', foreground);
   }
 
