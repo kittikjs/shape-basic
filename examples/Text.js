@@ -17,5 +17,5 @@ class Text extends Shape {
   }
 }
 
-Text.create({text: 'Hello there', x: 'center', y: '10%'}).render(cursor);
+Text.create({text: 'Hello there', x: 'center', y: 'middle'}).render(cursor);
 cursor.flush();
