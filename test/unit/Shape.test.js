@@ -51,7 +51,7 @@ describe('Shape', () => {
     assert.instanceOf(shape.setHeight(15), Shape);
     assert.equal(shape.getHeight(), 15);
     assert.instanceOf(shape.setHeight('50%'), Shape);
-    assert.equal(shape.getHeight(), Math.ceil(process.stdout.rows / 2));
+    assert.equal(shape.getHeight(), Math.floor(process.stdout.rows / 2));
   });
 
   it('Should properly get/set x coordinate', () => {
@@ -61,13 +61,13 @@ describe('Shape', () => {
     assert.instanceOf(shape.setX(20), Shape);
     assert.equal(shape.getX(), 20);
     assert.instanceOf(shape.setX('left'), Shape);
-    assert.equal(shape.getX(), 1);
+    assert.equal(shape.getX(), 0);
     assert.instanceOf(shape.setX('center'), Shape);
-    assert.equal(shape.getX(), Math.ceil(process.stdout.columns / 2 - shape.getWidth() / 2) + 1);
+    assert.equal(shape.getX(), Math.floor(process.stdout.columns / 2 - shape.getWidth() / 2));
     assert.instanceOf(shape.setX('right'), Shape);
-    assert.equal(shape.getX(), Math.ceil(process.stdout.columns - shape.getWidth()) + 1);
+    assert.equal(shape.getX(), Math.floor(process.stdout.columns - shape.getWidth()));
     assert.instanceOf(shape.setX('50%'), Shape);
-    assert.equal(shape.getX(), Math.ceil(process.stdout.columns / 2) + 1);
+    assert.equal(shape.getX(), Math.floor(process.stdout.columns / 2));
   });
 
   it('Should properly get/set y coordinate', () => {
@@ -77,13 +77,13 @@ describe('Shape', () => {
     assert.instanceOf(shape.setY(20), Shape);
     assert.equal(shape.getY(), 20);
     assert.instanceOf(shape.setY('top'), Shape);
-    assert.equal(shape.getY(), 1);
+    assert.equal(shape.getY(), 0);
     assert.instanceOf(shape.setY('middle'), Shape);
-    assert.equal(shape.getY(), Math.ceil(process.stdout.rows / 2 - shape.getHeight() / 2) + 1);
+    assert.equal(shape.getY(), Math.floor(process.stdout.rows / 2 - shape.getHeight() / 2));
     assert.instanceOf(shape.setY('bottom'), Shape);
-    assert.equal(shape.getY(), Math.ceil(process.stdout.rows - shape.getHeight()) + 1);
+    assert.equal(shape.getY(), Math.floor(process.stdout.rows - shape.getHeight()));
     assert.instanceOf(shape.setY('50%'), Shape);
-    assert.equal(shape.getY(), Math.ceil(process.stdout.rows / 2) + 1);
+    assert.equal(shape.getY(), Math.floor(process.stdout.rows / 2));
   });
 
   it('Should properly get/set background', () => {
@@ -120,8 +120,8 @@ describe('Shape', () => {
         height: 5,
         x: 10,
         y: 10,
-        background: undefined,
-        foreground: undefined
+        background: false,
+        foreground: false
       }
     });
   });
@@ -148,14 +148,14 @@ describe('Shape', () => {
     const shape = new Shape();
     const json = shape.toJSON();
 
-    assert.equal(json, '{"type":"Shape","options":{"text":"","width":15,"height":5,"x":10,"y":10}}');
+    assert.equal(json, '{"type":"Shape","options":{"text":"","width":15,"height":5,"x":10,"y":10,"background":false,"foreground":false}}');
   });
 
   it('Should properly serialize shape to JSON with custom options', () => {
     const shape = new Shape({text: 'test', x: 0, y: 0, width: 30, height: 50});
     const json = shape.toJSON();
 
-    assert.equal(json, '{"type":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0}}');
+    assert.equal(json, '{"type":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0,"background":false,"foreground":false}}');
   });
 
   it('Should properly create Shape instance from static create()', () => {
@@ -213,7 +213,7 @@ describe('Shape', () => {
     assert.equal(shape.getHeight(), 50);
     assert.equal(shape.getX(), 1);
     assert.equal(shape.getY(), 1);
-    assert.isUndefined(shape.getBackground());
-    assert.isUndefined(shape.getForeground());
+    assert.notOk(shape.getBackground());
+    assert.notOk(shape.getForeground());
   });
 });
