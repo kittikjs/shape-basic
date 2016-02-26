@@ -18,13 +18,10 @@ class Rectangle extends Shape {
     const foreground = this.getForeground();
     const filler = ' '.repeat(width);
 
-    if (typeof background !== 'undefined') cursor.background(background);
-    if (typeof foreground !== 'undefined') cursor.foreground(foreground);
-
     cursor.moveTo(x1, y1);
 
     for (let y = y1; y <= y2; y++) {
-      cursor.write(filler);
+      cursor.background(background).foreground(foreground).write(filler);
       cursor.moveTo(x1, y);
     }
 
@@ -44,4 +41,4 @@ Rectangle.create({text: '7', x: 'left', y: 'bottom', background: 'dark_green', f
 Rectangle.create({text: '8', x: 'center', y: 'bottom', background: 'black', foreground: 'white'}).render(cursor);
 Rectangle.create({text: '9', x: 'right', y: 'bottom', background: 'navy_blue', foreground: 'white'}).render(cursor);
 
-cursor.moveTo(1, process.stdout.rows).flush();
+cursor.moveTo(0, process.stdout.rows - 1).flush();
