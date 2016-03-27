@@ -7,7 +7,8 @@
  * import Shape from 'kittik-shape-basic';
  *
  * export default class Rectangle extends Shape {
- *   render(cursor) {
+ *   render() {
+ *     const cursor = this.getCursor();
  *     // Implement your logic here for rendering the shape
  *   }
  * }
@@ -15,16 +16,18 @@
 export default class Shape {
   /**
    * @constructor
+   * @param {Cursor} cursor Cursor instance used for render the shape
    * @param {Object} [options]
    * @param {String} [options.text] Text that will be rendered in the shape
    * @param {Number|String} [options.width] Shape width can be 100 (cells) or 100%
    * @param {Number|String} [options.height] Shape height can be 100 (cells) or 100%
    * @param {Number|String} [options.x] Absolute coordinate X can be 100 (cells), left, center, right or percents
    * @param {Number|String} [options.y] Absolute coordinate Y can be 100 (cells), top, middle, bottom or percents
-   * @param {Number|String} [options.background] Background color can be number from color table or color name
-   * @param {Number|String} [options.foreground] Foreground color can be number from color table or color name
+   * @param {String} [options.background] Background color can be color name, rgb or hex
+   * @param {String} [options.foreground] Foreground color can be color name, rgb or hex
    */
-  constructor(options = {}) {
+  constructor(cursor, options = {}) {
+    this.setCursor(cursor);
     this.setText(options.text);
     this.setWidth(options.width);
     this.setHeight(options.height);
@@ -67,6 +70,25 @@ export default class Shape {
   }
 
   /**
+   * Get cursor that used for render this shape.
+   *
+   * @returns {Cursor}
+   */
+  getCursor() {
+    return this.get('cursor');
+  }
+
+  /**
+   * Assign cursor to the shape which will be used for render this shape.
+   *
+   * @param {Cursor} cursor
+   * @returns {Shape}
+   */
+  setCursor(cursor) {
+    return this.set('cursor', cursor);
+  }
+
+  /**
    * Get text content from this shape.
    *
    * @returns {String}
@@ -93,7 +115,7 @@ export default class Shape {
   getWidth() {
     const width = this.get('width');
 
-    if (/\d+%$/.test(width)) return Math.floor(width.slice(0, -1) * process.stdout.columns / 100);
+    if (/\d+%$/.test(width)) return Math.floor(width.slice(0, -1) * this.getCursor()._width / 100);
 
     return width;
   }
@@ -101,7 +123,7 @@ export default class Shape {
   /**
    * Set new shape width.
    *
-   * @param {Number} [width=15] Shape width
+   * @param {Number|String} [width=15] Shape width
    * @returns {Shape}
    */
   setWidth(width = 15) {
@@ -116,7 +138,7 @@ export default class Shape {
   getHeight() {
     const height = this.get('height');
 
-    if (/\d+%$/.test(height)) return Math.floor(height.slice(0, -1) * process.stdout.rows / 100);
+    if (/\d+%$/.test(height)) return Math.floor(height.slice(0, -1) * this.getCursor()._height / 100);
 
     return height;
   }
@@ -124,7 +146,7 @@ export default class Shape {
   /**
    * Set new shape height.
    *
-   * @param {Number} [height=5] Shape height
+   * @param {Number|String} [height=5] Shape height
    * @returns {Shape}
    */
   setHeight(height = 5) {
@@ -140,9 +162,9 @@ export default class Shape {
     const x = this.get('x');
 
     if (x === 'left') return 0;
-    if (x === 'center') return Math.floor(process.stdout.columns / 2 - this.getWidth() / 2);
-    if (x === 'right') return Math.floor(process.stdout.columns - this.getWidth());
-    if (/\d+%$/.test(x)) return Math.floor(x.slice(0, -1) * process.stdout.columns / 100);
+    if (x === 'center') return Math.floor(this.getCursor()._width / 2 - this.getWidth() / 2);
+    if (x === 'right') return Math.floor(this.getCursor()._width - this.getWidth());
+    if (/\d+%$/.test(x)) return Math.floor(x.slice(0, -1) * this.getCursor()._width / 100);
 
     return x;
   }
@@ -150,7 +172,7 @@ export default class Shape {
   /**
    * Set X coordinate.
    *
-   * @param {Number} [x=10]
+   * @param {Number|String} [x=10]
    * @returns {Shape}
    */
   setX(x = 10) {
@@ -166,9 +188,9 @@ export default class Shape {
     const y = this.get('y');
 
     if (y === 'top') return 0;
-    if (y === 'middle') return Math.floor(process.stdout.rows / 2 - this.getHeight() / 2);
-    if (y === 'bottom') return Math.floor(process.stdout.rows - this.getHeight());
-    if (/\d+%$/.test(y)) return Math.floor(y.slice(0, -1) * process.stdout.rows / 100);
+    if (y === 'middle') return Math.floor(this.getCursor()._height / 2 - this.getHeight() / 2);
+    if (y === 'bottom') return Math.floor(this.getCursor()._height - this.getHeight());
+    if (/\d+%$/.test(y)) return Math.floor(y.slice(0, -1) * this.getCursor()._height / 100);
 
     return y;
   }
@@ -176,7 +198,7 @@ export default class Shape {
   /**
    * Set Y coordinate.
    *
-   * @param {Number} [y=10]
+   * @param {Number|String} [y=10]
    * @returns {Shape}
    */
   setY(y = 10) {
@@ -186,7 +208,7 @@ export default class Shape {
   /**
    * Get background color.
    *
-   * @returns {String}
+   * @returns {String|Boolean}
    */
   getBackground() {
     return this.get('background');
@@ -195,7 +217,7 @@ export default class Shape {
   /**
    * Set new background color.
    *
-   * @param {String} [background=false] Background value from cursor colors or color name
+   * @param {String|Boolean} [background=false] Color name, rgb, hex or false if you want to disable background
    * @returns {Shape}
    */
   setBackground(background = false) {
@@ -205,7 +227,7 @@ export default class Shape {
   /**
    * Get foreground color.
    *
-   * @returns {String}
+   * @returns {String|Boolean}
    */
   getForeground() {
     return this.get('foreground');
@@ -214,7 +236,7 @@ export default class Shape {
   /**
    * Set new foreground color.
    *
-   * @param {String} [foreground = false] Foreground value from cursor colors or color name
+   * @param {String|Boolean} [foreground = false] Color name, rgb, hex or false if you want to disable foreground
    * @returns {Shape}
    */
   setForeground(foreground = false) {
@@ -225,10 +247,9 @@ export default class Shape {
    * Base render method that must be implemented in childes.
    *
    * @abstract
-   * @param {Cursor} cursor Cursor instance which you can use for render the shape
    * @throws {Error} Throws error if method will not be overridden
    */
-  render(cursor) {
+  render() {
     throw new Error('render() method must be implemented');
   }
 
@@ -256,7 +277,7 @@ export default class Shape {
   /**
    * Returns JSON representation of the shape.
    *
-   * @returns {String}
+   * @returns {JSON}
    */
   toJSON() {
     return JSON.stringify(this.toObject());
@@ -277,7 +298,7 @@ export default class Shape {
    * Creates new Shape instance from Object representation.
    *
    * @static
-   * @param {Object} obj Object that you got from {@link Shape.toObject}
+   * @param {Object} obj Object that you got from {@link toObject} method
    * @returns {Shape}
    */
   static fromObject(obj) {
