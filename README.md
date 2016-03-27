@@ -29,7 +29,9 @@ Import module and extend another one:
 import Shape from 'kittik-shape-basic';
 
 export default class Rectangle extends Shape {
-  render(cursor) {
+  render() {
+    const cursor = this.getCursor();
+
     cursor.write('Hello');
     // Other logic for rendering the shape
   }
