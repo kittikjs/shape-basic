@@ -2,11 +2,12 @@
 
 const Cursor = require('kittik-cursor');
 const Shape = require('../lib/Shape');
-const cursor = new Cursor().resetTTY();
+const cursor = new Cursor().reset();
 
 // Create class that extends from Shape and implement render() method
 class Text extends Shape {
-  render(cursor) {
+  render() {
+    const cursor = this.getCursor();
     const text = this.getText();
     const x = this.getX();
     const y = this.getY();
@@ -17,5 +18,6 @@ class Text extends Shape {
   }
 }
 
-Text.create({text: 'Hello there', x: 'center', y: 'middle'}).render(cursor);
+Text.create(cursor, {text: 'Hello there', x: 'center', y: 'middle'}).render();
+
 cursor.flush();

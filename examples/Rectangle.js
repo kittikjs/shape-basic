@@ -2,11 +2,12 @@
 
 const Cursor = require('kittik-cursor');
 const Shape = require('../lib/Shape');
-const cursor = new Cursor().resetTTY();
+const cursor = new Cursor().reset();
 
 // Create class that extends from Shape and implement render() method
 class Rectangle extends Shape {
-  render(cursor) {
+  render() {
+    const cursor = this.getCursor();
     const text = this.getText();
     const width = this.getWidth();
     const height = this.getHeight();
@@ -31,14 +32,14 @@ class Rectangle extends Shape {
   }
 }
 
-Rectangle.create({text: '1', x: 'left', y: 'top', background: 'dark_green', foreground: 'white'}).render(cursor);
-Rectangle.create({text: '2', x: 'center', y: 'top', background: 'black', foreground: 'white'}).render(cursor);
-Rectangle.create({text: '3', x: 'right', y: 'top', background: 'navy_blue', foreground: 'white'}).render(cursor);
-Rectangle.create({text: '4', x: 'left', y: 'middle', background: 'dark_green', foreground: 'white'}).render(cursor);
-Rectangle.create({text: '5', x: 'center', y: 'middle', background: 'black', foreground: 'white'}).render(cursor);
-Rectangle.create({text: '6', x: 'right', y: 'middle', background: 'navy_blue', foreground: 'white'}).render(cursor);
-Rectangle.create({text: '7', x: 'left', y: 'bottom', background: 'dark_green', foreground: 'white'}).render(cursor);
-Rectangle.create({text: '8', x: 'center', y: 'bottom', background: 'black', foreground: 'white'}).render(cursor);
-Rectangle.create({text: '9', x: 'right', y: 'bottom', background: 'navy_blue', foreground: 'white'}).render(cursor);
+Rectangle.create(cursor, {text: '1', x: 'left', y: 'top', background: 'dark_green', foreground: 'white'}).render();
+Rectangle.create(cursor, {text: '2', x: 'center', y: 'top', background: 'black', foreground: 'white'}).render();
+Rectangle.create(cursor, {text: '3', x: 'right', y: 'top', background: 'navy_blue', foreground: 'white'}).render();
+Rectangle.create(cursor, {text: '4', x: 'left', y: 'middle', background: 'dark_green', foreground: 'white'}).render();
+Rectangle.create(cursor, {text: '5', x: 'center', y: 'middle', background: 'black', foreground: 'white'}).render();
+Rectangle.create(cursor, {text: '6', x: 'right', y: 'middle', background: 'navy_blue', foreground: 'white'}).render();
+Rectangle.create(cursor, {text: '7', x: 'left', y: 'bottom', background: 'dark_green', foreground: 'white'}).render();
+Rectangle.create(cursor, {text: '8', x: 'center', y: 'bottom', background: 'black', foreground: 'white'}).render();
+Rectangle.create(cursor, {text: '9', x: 'right', y: 'bottom', background: 'navy_blue', foreground: 'white'}).render();
 
-cursor.moveTo(0, process.stdout.rows - 1).flush();
+cursor.flush();
