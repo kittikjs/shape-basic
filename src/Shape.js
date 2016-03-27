@@ -296,26 +296,32 @@ export default class Shape {
 
   /**
    * Creates new Shape instance from Object representation.
+   * You can ignore cursor param and create only Shape representation.
+   * Though, you can add cursor in the runtime via {@link setCursor} method.
    *
    * @static
    * @param {Object} obj Object that you got from {@link toObject} method
+   * @param {Cursor} [cursor] Cursor instance
    * @returns {Shape}
    */
-  static fromObject(obj) {
+  static fromObject(obj, cursor) {
     if (!obj.type || !obj.options) throw new Error('It looks like it is not an Object representation of the shape');
     if (obj.type !== this.name) throw new Error(`${obj.type} is not an Object representation of the ${this.name}`);
 
-    return this.create(obj.options);
+    return this.create(cursor, obj.options);
   }
 
   /**
    * Creates new Shape instance from JSON representation.
+   * You can ignore cursor param and create only Shape representation.
+   * Though, you can add cursor in the runtime via {@link setCursor} method.
    *
    * @static
    * @param {String} json JSON string that you got from {@link Shape.toJSON}
+   * @param {Cursor} [cursor] Cursor instance
    * @returns {Shape}
    */
-  static fromJSON(json) {
-    return this.fromObject(JSON.parse(json));
+  static fromJSON(json, cursor) {
+    return this.fromObject(JSON.parse(json), cursor);
   }
 }
