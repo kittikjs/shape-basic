@@ -315,6 +315,10 @@ You can ignore cursor param and create only Shape representation.
 Though, you can add cursor in the runtime via [setCursor](setCursor) method.
 
 **Kind**: static method of <code>[Shape](#Shape)</code>  
+**Throws**:
+
+- <code>Error</code> Throws an error if object is not a representation of the shape
+
 
 | Param | Type | Description |
 | --- | --- | --- |
