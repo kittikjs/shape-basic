@@ -15,16 +15,29 @@
  */
 export default class Shape {
   /**
+   * Create basic Shape instance.
+   * This shape renders nothing, but throws an exception that you need to implement this shape in childes.
+   *
    * @constructor
    * @param {Cursor} cursor Cursor instance used for render the shape
-   * @param {Object} [options]
+   * @param {Object} [options] Options object
    * @param {String} [options.text] Text that will be rendered in the shape
    * @param {Number|String} [options.width] Shape width can be 100 (cells) or 100%
    * @param {Number|String} [options.height] Shape height can be 100 (cells) or 100%
    * @param {Number|String} [options.x] Absolute coordinate X can be 100 (cells), left, center, right or percents
    * @param {Number|String} [options.y] Absolute coordinate Y can be 100 (cells), top, middle, bottom or percents
-   * @param {String} [options.background] Background color can be color name, rgb or hex
-   * @param {String} [options.foreground] Foreground color can be color name, rgb or hex
+   * @param {String|Boolean} [options.background] Background color can be color name, rgb, hex or false it you want to disable
+   * @param {String|Boolean} [options.foreground] Foreground color can be color name, rgb, hex or false it you want to disable
+   * @example
+   * Shape.create(cursor, {
+   *   text: 'Hello, World',
+   *   width: '50%',
+   *   height: '50%',
+   *   x: 'center',
+   *   y: 'middle',
+   *   background: 'black',
+   *   foreground: 'white'
+   * });
    */
   constructor(cursor, options = {}) {
     this.setCursor(cursor);
@@ -42,6 +55,8 @@ export default class Shape {
    *
    * @param {String} path Path can be set with dot-notation
    * @returns {*}
+   * @example
+   * shape.get('my.options.object.value');
    */
   get(path) {
     return path.split('.').reduce((obj, key) => obj && obj[key], this);
@@ -53,6 +68,8 @@ export default class Shape {
    * @param {String} path Path can be set with dot-notation
    * @param {*} value Value that need to be written to the options object
    * @returns {Shape}
+   * @example
+   * shape.set('my.options.object.value', 'value');
    */
   set(path, value) {
     let obj = this;
@@ -125,6 +142,9 @@ export default class Shape {
    *
    * @param {Number|String} [width=15] Shape width
    * @returns {Shape}
+   * @example
+   * shape.setWidth(15); // shape width is equal to 15 cells in the terminal
+   * shape.setWidth('20%'); // shape width is equal to 20% of total viewport width
    */
   setWidth(width = 15) {
     return this.set('width', width);
@@ -148,6 +168,9 @@ export default class Shape {
    *
    * @param {Number|String} [height=5] Shape height
    * @returns {Shape}
+   * @example
+   * shape.setHeight(15); // shape height is equal to 15 cells in the terminal
+   * shape.setHeight('20%'); // shape height is equal to 20% of total viewport height
    */
   setHeight(height = 5) {
     return this.set('height', height);
@@ -174,6 +197,12 @@ export default class Shape {
    *
    * @param {Number|String} [x=10]
    * @returns {Shape}
+   * @example
+   * shape.setX(2); // move shape to third cell by X axis
+   * shape.setX('left'); // align shape to the left
+   * shape.setX('center'); // align shape in the center
+   * shape.setX('right'); // align shape to the right
+   * shape.setX('50%'); // move shape to 50% by X axis
    */
   setX(x = 10) {
     return this.set('x', x);
@@ -200,6 +229,12 @@ export default class Shape {
    *
    * @param {Number|String} [y=10]
    * @returns {Shape}
+   * @example
+   * shape.setY(2); // move shape to third cell by Y axis
+   * shape.setY('top'); // align shape to the top
+   * shape.setY('middle'); // align shape in the middle
+   * shape.setY('bottom'); // align shape to the bottom
+   * shape.setY('50%'); // move shape to 50% by Y axis
    */
   setY(y = 10) {
     return this.set('y', y);
@@ -219,6 +254,11 @@ export default class Shape {
    *
    * @param {String|Boolean} [background=false] Color name, rgb, hex or false if you want to disable background
    * @returns {Shape}
+   * @example
+   * shape.setBackground('black');
+   * shape.setBackground('#AABBCC');
+   * shape.setBackground('rgb(0, 100, 200)');
+   * shape.setBackground(false);
    */
   setBackground(background = false) {
     return this.set('background', background);
@@ -238,6 +278,11 @@ export default class Shape {
    *
    * @param {String|Boolean} [foreground = false] Color name, rgb, hex or false if you want to disable foreground
    * @returns {Shape}
+   * @example
+   * shape.setForeground('black');
+   * shape.setForeground('#AABBCC');
+   * shape.setForeground('rgb(0, 100, 200)');
+   * shape.setForeground(false);
    */
   setForeground(foreground = false) {
     return this.set('foreground', foreground);
@@ -247,7 +292,7 @@ export default class Shape {
    * Base render method that must be implemented in childes.
    *
    * @abstract
-   * @throws {Error} Throws error if method will not be overridden
+   * @throws {Error} Throws error if method is not overridden
    */
   render() {
     throw new Error('render() method must be implemented');
@@ -255,7 +300,7 @@ export default class Shape {
 
   /**
    * Returns Object representation of the shape.
-   * This representation consists of all options fields.
+   * This representation consists of all options fields that you can pass in the constructor.
    *
    * @returns {Object}
    */
@@ -303,6 +348,7 @@ export default class Shape {
    * @param {Object} obj Object that you got from {@link toObject} method
    * @param {Cursor} [cursor] Cursor instance
    * @returns {Shape}
+   * @throws {Error} Throws an error if object is not a representation of the shape
    */
   static fromObject(obj, cursor) {
     if (!obj.type || !obj.options) throw new Error('It looks like it is not an Object representation of the shape');
