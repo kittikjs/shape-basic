@@ -26,8 +26,8 @@ export default class Shape {
    * @param {Number|String} [options.height] Shape height can be 100 (cells) or 100%
    * @param {Number|String} [options.x] Absolute coordinate X can be 100 (cells), left, center, right or percents
    * @param {Number|String} [options.y] Absolute coordinate Y can be 100 (cells), top, middle, bottom or percents
-   * @param {String|Boolean} [options.background] Background color can be color name, rgb, hex or false it you want to disable
-   * @param {String|Boolean} [options.foreground] Foreground color can be color name, rgb, hex or false it you want to disable
+   * @param {String} [options.background] Background color can be only color name or `none` if you want to disable
+   * @param {String} [options.foreground] Foreground color can be only color name or `none` if you want to disable
    * @example
    * Shape.create(cursor, {
    *   text: 'Hello, World',
@@ -36,7 +36,7 @@ export default class Shape {
    *   x: 'center',
    *   y: 'middle',
    *   background: 'black',
-   *   foreground: 'white'
+   *   foreground: 'none'
    * });
    */
   constructor(cursor, options = {}) {
@@ -243,7 +243,7 @@ export default class Shape {
   /**
    * Get background color.
    *
-   * @returns {String|Boolean}
+   * @returns {String}
    */
   getBackground() {
     return this.get('background');
@@ -252,22 +252,20 @@ export default class Shape {
   /**
    * Set new background color.
    *
-   * @param {String|Boolean} [background=false] Color name, rgb, hex or false if you want to disable background
+   * @param {String} [background = none] Color name or `none` if you want to disable background
    * @returns {Shape}
    * @example
    * shape.setBackground('black');
-   * shape.setBackground('#AABBCC');
-   * shape.setBackground('rgb(0, 100, 200)');
-   * shape.setBackground(false);
+   * shape.setBackground('none');
    */
-  setBackground(background = false) {
+  setBackground(background = 'none') {
     return this.set('background', background);
   }
 
   /**
    * Get foreground color.
    *
-   * @returns {String|Boolean}
+   * @returns {String}
    */
   getForeground() {
     return this.get('foreground');
@@ -276,15 +274,13 @@ export default class Shape {
   /**
    * Set new foreground color.
    *
-   * @param {String|Boolean} [foreground = false] Color name, rgb, hex or false if you want to disable foreground
+   * @param {String} [foreground = none] Color name or `none` if you want to disable foreground
    * @returns {Shape}
    * @example
    * shape.setForeground('black');
-   * shape.setForeground('#AABBCC');
-   * shape.setForeground('rgb(0, 100, 200)');
-   * shape.setForeground(false);
+   * shape.setForeground('none');
    */
-  setForeground(foreground = false) {
+  setForeground(foreground = 'none') {
     return this.set('foreground', foreground);
   }
 
