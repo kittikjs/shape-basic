@@ -91,7 +91,7 @@ describe('Shape', () => {
   it('Should properly get/set background', () => {
     const shape = new Shape(cursor);
 
-    assert.notOk(shape.getBackground());
+    assert.equal(shape.getBackground(), 'none');
     assert.instanceOf(shape.setBackground('red'), Shape);
     assert.equal(shape.getBackground(), 'red');
   });
@@ -99,7 +99,7 @@ describe('Shape', () => {
   it('Should properly get/set foreground', () => {
     const shape = new Shape(cursor);
 
-    assert.notOk(shape.getBackground());
+    assert.equal(shape.getForeground(), 'none');
     assert.instanceOf(shape.setForeground('yellow'), Shape);
     assert.equal(shape.getForeground(), 'yellow');
   });
@@ -122,8 +122,8 @@ describe('Shape', () => {
         height: 5,
         x: 10,
         y: 10,
-        background: false,
-        foreground: false
+        background: 'none',
+        foreground: 'none'
       }
     });
   });
@@ -158,14 +158,14 @@ describe('Shape', () => {
     const shape = new Shape(cursor);
     const json = shape.toJSON();
 
-    assert.equal(json, '{"type":"Shape","options":{"text":"","width":15,"height":5,"x":10,"y":10,"background":false,"foreground":false}}');
+    assert.equal(json, '{"type":"Shape","options":{"text":"","width":15,"height":5,"x":10,"y":10,"background":"none","foreground":"none"}}');
   });
 
   it('Should properly serialize shape to JSON with custom options', () => {
     const shape = new Shape(cursor, {text: 'test', x: 0, y: 0, width: 30, height: 50});
     const json = shape.toJSON();
 
-    assert.equal(json, '{"type":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0,"background":false,"foreground":false}}');
+    assert.equal(json, '{"type":"Shape","options":{"text":"test","width":30,"height":50,"x":0,"y":0,"background":"none","foreground":"none"}}');
   });
 
   it('Should properly create Shape instance from static create()', () => {
@@ -225,7 +225,7 @@ describe('Shape', () => {
     assert.equal(shape.getHeight(), 50);
     assert.equal(shape.getX(), 1);
     assert.equal(shape.getY(), 1);
-    assert.notOk(shape.getBackground());
-    assert.notOk(shape.getForeground());
+    assert.equal(shape.getBackground(), 'none');
+    assert.equal(shape.getForeground(), 'none');
   });
 });
