@@ -24,9 +24,9 @@ Each custom shape must extends from this class.
         * [.setX([x])](#Shape+setX) ⇒ <code>[Shape](#Shape)</code>
         * [.getY()](#Shape+getY) ⇒ <code>Number</code>
         * [.setY([y])](#Shape+setY) ⇒ <code>[Shape](#Shape)</code>
-        * [.getBackground()](#Shape+getBackground) ⇒ <code>String</code> &#124; <code>Boolean</code>
+        * [.getBackground()](#Shape+getBackground) ⇒ <code>String</code>
         * [.setBackground([background])](#Shape+setBackground) ⇒ <code>[Shape](#Shape)</code>
-        * [.getForeground()](#Shape+getForeground) ⇒ <code>String</code> &#124; <code>Boolean</code>
+        * [.getForeground()](#Shape+getForeground) ⇒ <code>String</code>
         * [.setForeground([foreground])](#Shape+setForeground) ⇒ <code>[Shape](#Shape)</code>
         * *[.render()](#Shape+render)*
         * [.toObject()](#Shape+toObject) ⇒ <code>Object</code>
@@ -52,8 +52,8 @@ This shape renders nothing, but throws an exception that you need to implement t
 | [options.height] | <code>Number</code> &#124; <code>String</code> | Shape height can be 100 (cells) or 100% |
 | [options.x] | <code>Number</code> &#124; <code>String</code> | Absolute coordinate X can be 100 (cells), left, center, right or percents |
 | [options.y] | <code>Number</code> &#124; <code>String</code> | Absolute coordinate Y can be 100 (cells), top, middle, bottom or percents |
-| [options.background] | <code>String</code> &#124; <code>Boolean</code> | Background color can be color name, rgb, hex or false it you want to disable |
-| [options.foreground] | <code>String</code> &#124; <code>Boolean</code> | Foreground color can be color name, rgb, hex or false it you want to disable |
+| [options.background] | <code>String</code> | Background color can be only color name or `none` if you want to disable |
+| [options.foreground] | <code>String</code> | Foreground color can be only color name or `none` if you want to disable |
 
 **Example**  
 ```js
@@ -227,7 +227,7 @@ shape.setY('50%'); // move shape to 50% by Y axis
 ```
 <a name="Shape+getBackground"></a>
 
-### shape.getBackground() ⇒ <code>String</code> &#124; <code>Boolean</code>
+### shape.getBackground() ⇒ <code>String</code>
 Get background color.
 
 **Kind**: instance method of <code>[Shape](#Shape)</code>  
@@ -240,18 +240,16 @@ Set new background color.
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [background] | <code>String</code> &#124; <code>Boolean</code> | <code>false</code> | Color name, rgb, hex or false if you want to disable background |
+| [background] | <code>String</code> | <code>none</code> | Color name or `none` if you want to disable background |
 
 **Example**  
 ```js
 shape.setBackground('black');
-shape.setBackground('#AABBCC');
-shape.setBackground('rgb(0, 100, 200)');
-shape.setBackground(false);
+shape.setBackground('none');
 ```
 <a name="Shape+getForeground"></a>
 
-### shape.getForeground() ⇒ <code>String</code> &#124; <code>Boolean</code>
+### shape.getForeground() ⇒ <code>String</code>
 Get foreground color.
 
 **Kind**: instance method of <code>[Shape](#Shape)</code>  
@@ -264,14 +262,12 @@ Set new foreground color.
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [foreground] | <code>String</code> &#124; <code>Boolean</code> | <code>false</code> | Color name, rgb, hex or false if you want to disable foreground |
+| [foreground] | <code>String</code> | <code>none</code> | Color name or `none` if you want to disable foreground |
 
 **Example**  
 ```js
 shape.setForeground('black');
-shape.setForeground('#AABBCC');
-shape.setForeground('rgb(0, 100, 200)');
-shape.setForeground(false);
+shape.setForeground('none');
 ```
 <a name="Shape+render"></a>
 
